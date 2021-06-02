@@ -1,0 +1,22 @@
+.parent{
+    -fx-background-image:url("../res/wallpaper.jpg");
+    -fx-background-position:center;
+    -fx-background-repeat:no-repeat;
+    -fx-background-size:1000 800;
+}
+.label{
+    -fx-text-fill:#212121;
+}
+
+.textfields{
+}
+.buttons{
+    -fx-background-color:#37474f  ;
+    -fx-background-radius:5px;
+    -fx-text-fill:#cfd8dc ;
+}
+
+.pane{
+}
+.icons{
+}

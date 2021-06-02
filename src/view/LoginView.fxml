@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Login">
+    <children>
+        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <right>
+                <AnchorPane prefHeight="600.0" prefWidth="391.0" style="-fx-background-color: #fffde7;" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox layoutX="94.0" layoutY="246.0" prefHeight="109.0" prefWidth="204.0" spacing="20.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="35.0" prefWidth="207.0">
+                                    <children>
+                              <TextField fx:id="nameField" prefHeight="35.0" prefWidth="197.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: #ffe0b2; -fx-border-width: 0 0 4 0;" />
+                                        <Label prefHeight="59.0" prefWidth="12.0" style="-fx-background-color: transparent; -fx-border-color: #ffe0b2; -fx-border-width: 0 0 4 0;">
+                                            <graphic>
+                                                <FontAwesomeIconView glyphName="CREDIT_CARD" wrappingWidth="12.0" />
+                                            </graphic>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="31.0" prefWidth="200.0">
+                                    <children>
+                                        <PasswordField fx:id="passwordField" prefHeight="35.0" prefWidth="227.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #ffe0b2; -fx-border-width: 0 0 4 0;" />
+                                        <Label prefHeight="59.0" prefWidth="12.0" style="-fx-background-color: transparent; -fx-border-color: #ffe0b2; -fx-border-width: 0 0 4 0;">
+                                            <graphic>
+                                                <FontAwesomeIconView glyphName="KEY" wrappingWidth="12.0" />
+                                            </graphic>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <JFXButton layoutX="254.0" layoutY="379.0" onAction="#loginButtonPushed" style="-fx-background-color: #ffe0b2;" text="Login" />
+                        <Label fx:id="errorLabel" layoutX="118.0" layoutY="462.0" textFill="#bf0808" />
+                  <JFXButton layoutX="159.0" layoutY="379.0" onAction="#signupButtonPushed" style="-fx-background-color: #ffe0b2;" text="Sign Up" />
+                    </children>
+                </AnchorPane>
+            </right>
+            <center>
+                <AnchorPane prefHeight="600.0" prefWidth="417.0" style="-fx-background-color: #ffe0b2;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label layoutX="128.0" layoutY="217.0" prefHeight="82.0" prefWidth="139.0" text="The new App">
+                            <font>
+                                <Font name="Haettenschweiler" size="24.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
