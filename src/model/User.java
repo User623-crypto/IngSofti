@@ -1,7 +1,7 @@
 package model;
 
 public class User {
-    private int id;
+    private Integer id;
     private String name;
     private String password;
     private boolean notification_on = true;
@@ -45,7 +45,7 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
