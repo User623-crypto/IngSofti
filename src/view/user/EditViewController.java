@@ -1,0 +1,138 @@
+package view.user;
+
+import com.jfoenix.controls.JFXRadioButton;
+import error.ErrorHandler;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import model.User;
+import model.dao.UserDao;
+import zextra.ControllerClass;
+import zextra.SceneChanger;
+import zextra.Session;
+import zextra.UtilityZ;
+
+import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class EditViewController implements Initializable, ControllerClass {
+    @FXML private
+    Label name;
+    @FXML private Label errorLabel;
+    @FXML private
+    TextField nameField;
+    @FXML private
+    PasswordField passwordField;
+    @FXML private
+    JFXRadioButton noNotification;
+    @FXML private JFXRadioButton yesNotification;
+    @FXML private ImageView image;
+    User user;
+    SceneChanger sceneChanger = new SceneChanger();
+
+    ToggleGroup notificationGroup = new ToggleGroup();
+
+    boolean didChangeImage = false;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        user = Session.userSession.copyUser();
+        noNotification.setToggleGroup(notificationGroup);
+        yesNotification.setToggleGroup(notificationGroup);
+    }
+
+    @Override
+    public void preloadData(Object object) {
+            name.setText(user.getName());
+            nameField.setText(user.getName());
+            passwordField.setText(user.getPassword());
+            UtilityZ.setImage(new File("./src/res/"+user.getImageFile().getName()),image);
+            if (user.isNotification_on()) yesNotification.setSelected(true);
+            else noNotification.setSelected(true);
+            errorLabel.setText("");
+    }
+
+    public void updateButtonPushed()
+    {
+        try{
+            user.setName(nameField.getText());
+            user.setPassword(passwordField.getText());
+            user.setNotification_on(yesNotification.isSelected());
+
+            if (!Session.userSession.getName().equals(user.getName())) {
+                boolean doesExist = new UserDao().doesExist(user.getName());
+                if (doesExist) throw new Exception("The user Exist");
+            }
+            if (didChangeImage) {
+                user.saveImageFileLocally();
+            }
+            new UserDao().updateFromDb(user);
+            Session.userSession = user;
+            ErrorHandler.generateConfirmation(name,"Updated",null);
+            errorLabel.setText("");
+
+        }catch (Exception e){
+            errorLabel.setText(e.getMessage());
+        }
+    }
+    public void goBack(ActionEvent event){
+        try {
+            sceneChanger.changeScene(event,"/view/MainView.fxml","MainView",Session.userSession);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+            ErrorHandler.generateError(e.getMessage(),()->{
+
+            });
+        }
+    }
+
+    /**
+     * This method will change the image of the user when clicked
+     * @param event
+     */
+    public void changeImage(ActionEvent event){
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Image");
+
+        FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("Image File (*.jpg)","*.jpg");
+        FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("Image File (*.png)","*.png");
+        fileChooser.getExtensionFilters().addAll(jpgFilter,pngFilter);
+
+        String userDirectoryString = System.getProperty("user.home")+"\\Pictures";
+        File userDirectory = new File(userDirectoryString);
+        if (!userDirectory.canRead())
+            userDirectory = new File(System.getProperty("user.home"));
+
+        fileChooser.setInitialDirectory(userDirectory);
+
+        File imageFile = fileChooser.showOpenDialog(stage);
+
+        if (imageFile !=null){
+            if (imageFile.isFile())
+            {
+                try {
+                    UtilityZ.setImage(imageFile,image);
+                    user.setImageFile(imageFile);
+                    didChangeImage = true;
+                }catch (Exception e)
+                {
+                    ErrorHandler.generateError("Can not set the image"+e.getMessage(),()->{});
+                }
+            }
+        }
+
+
+    }
+
+}

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.courses.MainViewController">
+    <children>
+        <AnchorPane layoutY="104.0" prefHeight="696.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="104.0">
+            <children>
+                <JFXTabPane prefHeight="800.0" prefWidth="680.0" side="LEFT" style="-fx-tab-min-height: 150;" stylesheets="@../../styles/main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                        <Tab>
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="666.0" prefWidth="643.0" style="-fx-background-color: #e0e0e0;">
+                                    <children>
+                                        <GridPane layoutX="77.0" layoutY="63.0" prefHeight="508.0" prefWidth="358.0" vgap="20.0" AnchorPane.leftAnchor="77.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="135.0" minWidth="10.0" prefWidth="135.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.0" minWidth="10.0" prefWidth="197.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Label alignment="CENTER_RIGHT" text="Time" GridPane.rowIndex="1">
+                                                    <graphic>
+                                                        <FontAwesomeIconView glyphName="CREDIT_CARD" />
+                                                    </graphic></Label>
+                                                <Label alignment="CENTER_RIGHT" text="Course Day">
+                                                    <graphic>
+                                                        <FontAwesomeIconView glyphName="CREDIT_CARD" />
+                                                    </graphic>
+                                                </Label>
+                                    <Label fx:id="dayLabel" text="Course Day Label" GridPane.columnIndex="1" />
+                                    <Label fx:id="timeLabel" text="Course Time Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            </children>
+                                        </GridPane>
+                                        <HBox layoutX="14.0" layoutY="623.0" prefHeight="59.0" prefWidth="835.0" spacing="50.0">
+                                            <children>
+                                                <Button fx:id="enrollButton" mnemonicParsing="false" onAction="#enrollButtonPushed" text="Enroll" />
+                                                <Button fx:id="dropButton" mnemonicParsing="false" onAction="#dropButtonPushed" text="Drop" />
+                                            </children>
+                                        </HBox>
+                                    </children></AnchorPane>
+                            </content>
+                            <graphic>
+                                <Label cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Details">
+                                    <font>
+                                        <Font name="Calibri" size="20.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                        </Tab>
+                        <Tab>
+                            <graphic>
+                                <Label cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Ateendees">
+                                    <font>
+                                        <Font name="Calibri" size="20.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                            <content>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="696.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <JFXListView fx:id="usersInCourseList" prefHeight="696.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children></AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab>
+                            <graphic>
+                                <Label cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Comments">
+                                    <font>
+                                        <Font name="Calibri" size="20.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane layoutX="292.0" layoutY="213.0" prefHeight="696.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <ScrollPane>
+                                       <content>
+                                          <VBox prefHeight="689.0" prefWidth="842.0">
+                                             <children>
+                                                <VBox prefHeight="171.0" prefWidth="842.0">
+                                                   <children>
+                                                      <JFXTextArea />
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" text="Like" />
+                                                            <Label text="Like Number" />
+                                                            <Button mnemonicParsing="false" text="Reply" />
+                                                         </children>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="171.0" prefWidth="842.0">
+                                                   <children>
+                                                      <JFXTextArea />
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" text="Like" />
+                                                            <Label text="Like Number" />
+                                                            <Button mnemonicParsing="false" text="Reply" />
+                                                         </children>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="171.0" prefWidth="842.0">
+                                                   <children>
+                                                      <JFXTextArea />
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" text="Like" />
+                                                            <Label text="Like Number" />
+                                                            <Button mnemonicParsing="false" text="Reply" />
+                                                         </children>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="171.0" prefWidth="842.0">
+                                                   <children>
+                                                      <JFXTextArea />
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" text="Like" />
+                                                            <Label text="Like Number" />
+                                                            <Button mnemonicParsing="false" text="Reply" />
+                                                         </children>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="171.0" prefWidth="842.0">
+                                                   <children>
+                                                      <JFXTextArea />
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" text="Like" />
+                                                            <Label text="Like Number" />
+                                                            <Button mnemonicParsing="false" text="Reply" />
+                                                         </children>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="171.0" prefWidth="842.0">
+                                                   <children>
+                                                      <JFXTextArea />
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" text="Like" />
+                                                            <Label text="Like Number" />
+                                                            <Button mnemonicParsing="false" text="Reply" />
+                                                         </children>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="171.0" prefWidth="842.0">
+                                                   <children>
+                                                      <JFXTextArea />
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" text="Like" />
+                                                            <Label text="Like Number" />
+                                                            <Button mnemonicParsing="false" text="Reply" />
+                                                         </children>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="171.0" prefWidth="842.0">
+                                                   <children>
+                                                      <JFXTextArea />
+                                                      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                         <children>
+                                                            <Button mnemonicParsing="false" text="Like" />
+                                                            <Label text="Like Number" />
+                                                            <Button mnemonicParsing="false" text="Reply" />
+                                                         </children>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </ScrollPane>
+                           </children></AnchorPane>
+                     </content>
+                        </Tab>
+                    </tabs>
+                </JFXTabPane>
+            </children>
+        </AnchorPane>
+        <HBox alignment="CENTER" prefHeight="105.0" prefWidth="1000.0" styleClass="sidebar" stylesheets="@../../styles/main.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="nameLabel" alignment="CENTER" prefHeight="88.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-font-family: Calibri;" text="Course Name" textFill="WHITE">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                    <font>
+                        <Font name="SansSerif Regular" size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

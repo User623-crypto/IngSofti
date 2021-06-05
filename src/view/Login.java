@@ -42,7 +42,7 @@ public class Login implements Initializable {
                 if (passwordField.getText().equals(user.getPassword()))
                 {
                     Session.userSession = user;
-                    sceneChanger.changeScene(event,"/view/MainView.fxml","Main Page");
+                    sceneChanger.changeScene(event,"/view/MainView.fxml","Main Page",Session.userSession);
                 }else {
                     errorLabel.setText("Password is wrong");
                 }
@@ -62,7 +62,7 @@ public class Login implements Initializable {
 
             new UserDao().insertIntoDB(user);
             Session.userSession = user;
-            sceneChanger.changeScene(event,"/view/MainView.fxml","Main Page");
+            sceneChanger.changeScene(event,"/view/MainView.fxml","Main Page",Session.userSession);
 
         }catch (Exception e)
         {

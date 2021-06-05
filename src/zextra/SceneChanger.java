@@ -1,6 +1,7 @@
 package zextra;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -78,7 +79,7 @@ public class SceneChanger {
 
     }
 
-    public void changeScene(ActionEvent event, String viewName, String Title, User user, ControllerClass  controllerClass) throws IOException
+    public void changeScene(ActionEvent event, String viewName, String Title, User user) throws IOException
     {
         closeConnection();
         FXMLLoader loader=new FXMLLoader();
@@ -87,7 +88,7 @@ public class SceneChanger {
         Parent parent=loader.load();
 
         Scene scene=new Scene(parent);
-        controllerClass=loader.getController();
+        ControllerClass controllerClass = loader.getController();
         controllerClass.preloadData(user);
 
         Stage stage= (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -98,8 +99,8 @@ public class SceneChanger {
         stage.show();
     }
 
-    public void createStage(ActionEvent event, String viewName, String Title,
-                            Object objekt, ControllerClass controllerClass, Node button) throws IOException {
+    public void createStage(String viewName, String Title,
+                            Object objekt, Node button) throws IOException {
 
         if(objekt == null)
             return;
@@ -110,7 +111,7 @@ public class SceneChanger {
 
         Scene scene = new Scene(parent);
 
-        controllerClass = loader.getController();
+        ControllerClass controllerClass = loader.getController();
 
         controllerClass.preloadData(objekt);
 
@@ -132,6 +133,33 @@ public class SceneChanger {
 //        });
 
 
+
+    }
+
+    public void createStage2(ActionEvent event, String viewName, String Title,
+                             Object objekt) throws IOException {
+
+        if(objekt == null)
+            return;
+        Stage newStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(viewName));
+        Parent parent = loader.load();
+
+        Scene scene = new Scene(parent);
+
+        ControllerClass controllerClass = loader.getController();
+
+        controllerClass.preloadData(objekt);
+
+        Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        newStage.setTitle(Title);
+
+        newStage.setScene(scene);
+        newStage.initModality(Modality.WINDOW_MODAL);
+        newStage.initOwner(currentStage);
+        newStage.show();
+        newStage.setResizable(false);
 
     }
 

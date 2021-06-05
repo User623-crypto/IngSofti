@@ -8,8 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import model.User;
 import zdatabase.DatabaseManager;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -24,6 +26,13 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        User a = new User("Luka","Laka");
+        try{
+            a.setImageFile(new File("./src/res/yugi.png"));
+            a.saveImageFileLocally();
+        }catch (Exception e){ System.out.println(e.getMessage());}
+
         primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
             try {
                 Connection connection = DatabaseManager.getConnection();

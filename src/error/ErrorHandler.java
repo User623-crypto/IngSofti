@@ -32,6 +32,7 @@ public class ErrorHandler {
         errorAlert.setTitle("Grave error");
         errorAlert.setContentText(error);
         errorAlert.show();
+        if (errorCallBack==null) return;
         errorAlert.setOnCloseRequest(event -> errorCallBack.executeErrorCallBack());
     }
 
