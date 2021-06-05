@@ -4,6 +4,8 @@
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
+SET FOREIGN_KEY_CHECKS=0;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -24,16 +26,18 @@ DROP TABLE IF EXISTS `comment`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comment` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `text` varchar(255) DEFAULT NULL,
-  `like_number` int unsigned DEFAULT '0',
-  `comment_course` int unsigned DEFAULT NULL,
-  `commet_user` int unsigned DEFAULT NULL,
+  `id_thread` int unsigned DEFAULT NULL,
+  `id_course` int unsigned DEFAULT NULL,
+  `id_user` int unsigned DEFAULT NULL,
+  `comment_type` tinyint unsigned DEFAULT 0,
+  `comment_body` varchar(255) DEFAULT NULL,
+  `no_of_likes` int unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `fk_comment_user_idx` (`commet_user`),
-  KEY `fk_comment_course_idx` (`comment_course`),
-  CONSTRAINT `fk_comment_course` FOREIGN KEY (`comment_course`) REFERENCES `course` (`id`),
-  CONSTRAINT `fk_comment_user` FOREIGN KEY (`commet_user`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_comment_user_idx` (`id_user`),
+  KEY `fk_comment_course_idx` (`id_course`),
+  CONSTRAINT `fk_comment_course` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`),
+  CONSTRAINT `fk_comment_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +46,13 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` (`id_thread`, `id_course`, `id_user`, `comment_type`, `comment_body`, `no_of_likes`) VALUES
+    (NULL, 1, 1, 0, 'Koment1', 0),
+    (1, NULL, 2, 1, 'Reply1Koment1', 0),
+    (1, NULL, 3, 1, 'Reply2Koment1', 0),
+    (NULL, 1, 2, 0, 'Koment2', 0),
+    (4, NULL, 1, 1, 'Reply1Koment2', 0),
+    (4, NULL, 3, 1, 'Reply2Koment2', 1);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
