@@ -126,9 +126,11 @@ public class User {
                     User a = friendsTable.getSelectionModel().getSelectedItem();
                     if (a == null) return;
                     try{
-                        new SceneChanger().createStage("/view/courses/MainView.fxml","Course",a, friendsTable);
+                        new SceneChanger().createStage("/view/user/ProfileView.fxml","Course",a, friendsTable);
 
-                    }catch (Exception ignore){}
+                    }catch (Exception ignore){
+                        ignore.printStackTrace();
+                    }
                 }
             }
         });

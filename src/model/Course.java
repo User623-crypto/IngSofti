@@ -81,4 +81,32 @@ public class Course {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void initCoursesTable(TableView<Course> coursesTable, TableColumn<Course,String> nameCol,
+                                        ObservableList<Course> courses,int userId)
+    {
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        coursesTable.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    Course a = coursesTable.getSelectionModel().getSelectedItem();
+                    if (a == null) return;
+                    try{
+                        new SceneChanger().createStage("/view/courses/MainView.fxml","Course",a, coursesTable);
+
+                    }catch (Exception ignore){}
+                }
+            }
+        });
+        coursesTable.setItems(courses);
+        try {
+            courses.addAll(new CourseDao().readAllUserCourses(userId));
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 }

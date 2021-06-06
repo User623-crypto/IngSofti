@@ -163,5 +163,35 @@ public class CourseDao {
 
         return courses;
     }
+    public List<Course> readAllUserCourses(int userId) throws  SQLException{
+        Connection connection = DatabaseManager.getConnection();
+        ResultSet rs;
+        List <Course> courses = new ArrayList<>();
+        PreparedStatement preparedStatement;
+
+        if (connection==null)
+            throw new SQLException("Can not establish connection");
+
+        String mysql="select course.* from user_course\n" +
+                "join course on course_id = course.id\n" +
+                "                where user_id = ?;";
+        preparedStatement=connection.prepareStatement(mysql);
+        preparedStatement.setInt(1,userId );
+
+
+        rs=preparedStatement.executeQuery();
+
+        while (rs.next())
+        {
+            Course course = new Course(rs.getString("name"),rs.getInt("dita"),rs.getString("orari"));
+            course.setId(rs.getInt("id"));
+            courses.add(course);
+        }
+
+        preparedStatement.close();
+
+        return courses;
+    }
+
 
 }
