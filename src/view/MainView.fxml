@@ -42,7 +42,7 @@
                   <Font name="Calibri Light" size="20.0" />
                </font>
             </JFXButton>
-            <JFXButton alignment="TOP_LEFT" prefHeight="60.0" prefWidth="320.0" styleClass="btns" text="Calendar" textFill="#7c8184">
+            <JFXButton alignment="TOP_LEFT" onAction="#checkCoursesCalendar" prefHeight="60.0" prefWidth="320.0" styleClass="btns" text="Calendar" textFill="#7c8184">
                <graphic>
                   <FontAwesomeIconView fill="#d72ba6" glyphName="COFFEE" size="18" />
                </graphic>

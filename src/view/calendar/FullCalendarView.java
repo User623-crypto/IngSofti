@@ -1,15 +1,25 @@
 package view.calendar;
 
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import model.Course;
+import model.User;
+import model.dao.CourseDao;
+import zextra.ControllerClass;
+import zextra.Session;
 
+import java.net.URL;
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class FullCalendarView {
@@ -18,6 +28,9 @@ public class FullCalendarView {
     private VBox view;
     private Text calendarTitle;
     private YearMonth currentYearMonth;
+
+    private List<Course> courses = new ArrayList<>();
+
 
     /**
      * Create a calendar view
@@ -72,6 +85,15 @@ public class FullCalendarView {
      * @param yearMonth year and month of month to render
      */
     public void populateCalendar(YearMonth yearMonth) {
+        List<Course> courses = new ArrayList<>();
+
+        int userId = Session.userSession.getId();
+        try {
+            courses = CourseDao.getCoursesByUser(userId);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         // Get the date we want to start with on the calendar
         LocalDate calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
         Month currentMonth = yearMonth.getMonth();
@@ -93,22 +115,33 @@ public class FullCalendarView {
             ap.setTopAnchor(txt, 5.0);
             ap.setLeftAnchor(txt, 5.0);
             ap.getChildren().add(txt);
-            /*
-            * TODO: shto styling nese ka kurse ate dite
-             */
+
+            boolean hasCourse = false;
+            List<Course> apCourse = new ArrayList<>();
+            for(Course c : courses){
+                if(calendarDate.getDayOfWeek().ordinal()+1 == c.getDay()) {
+                    hasCourse = true;
+                    apCourse.add(c);
+                }
+            }
+            ap.setCourses(apCourse);
+
             if(calendarDate.getDayOfWeek().equals(DayOfWeek.SATURDAY)
                     || calendarDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
             {
+                ap.setDisable(true);
                 if(currentMonth.equals(calendarDate.getMonth()))
-                    ap.setStyle("-fx-background-color: gray; -fx-border-color: black, black, black, black");
+                    ap.setStyle("-fx-background-color: lightgray; -fx-border-color: black, black, black, black");
                 else
-                    ap.setStyle("-fx-background-color: white; -fx-border-color: black, black, black, black");
+                    ap.setStyle("-fx-background-color: gray; -fx-border-color: black, black, black, black");
             }
             else {
-                if(currentMonth.equals(calendarDate.getMonth()))
-                    ap.setStyle("-fx-background-color: red; -fx-border-color: black, black, black, black");
-                else
+                if(hasCourse && currentMonth.equals(calendarDate.getMonth()))
+                    ap.setStyle("-fx-background-color: #52ff52; -fx-border-color: black, black, black, black");
+                else if(currentMonth.equals(calendarDate.getMonth()))
                     ap.setStyle("-fx-background-color: white; -fx-border-color: black, black, black, black");
+                else
+                    ap.setStyle("-fx-background-color: gray; -fx-border-color: black, black, black, black");
             }
 
 

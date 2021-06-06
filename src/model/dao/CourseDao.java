@@ -107,4 +107,61 @@ public class CourseDao {
         return users;
     }
 
+    public static List<Course> readCoursesByDay(int weekdayOrdinal) throws SQLException
+    {
+        Connection connection = DatabaseManager.getConnection();
+        ResultSet rs;
+        List<Course> courses = new ArrayList<>();
+        Course course = null;
+        PreparedStatement preparedStatement;
+
+        if (connection==null)
+            throw new SQLException("Can not establish connection");
+        String mysql="select * from course where dita = ?;";
+        preparedStatement=connection.prepareStatement(mysql);
+        preparedStatement.setInt(1, weekdayOrdinal);
+
+        rs=preparedStatement.executeQuery();
+
+        while (rs.next())
+        {
+            course = new Course(rs.getString("name"),rs.getInt("dita"),rs.getString("orari"));
+            course.setId(rs.getInt("id"));
+            courses.add(course);
+        }
+
+        preparedStatement.close();
+
+        return courses;
+    }
+
+    public static List<Course> getCoursesByUser(int userId) throws SQLException {
+        Connection connection = DatabaseManager.getConnection();
+        ResultSet rs;
+        List<Course> courses = new ArrayList<>();
+        Course course = null;
+        PreparedStatement preparedStatement;
+
+        if (connection==null)
+            throw new SQLException("Can not establish connection");
+        String mysql="select * from user_course " +
+                "INNER JOIN course ON course.id = user_course.course_id " +
+                "where user_id = ?;";
+        preparedStatement=connection.prepareStatement(mysql);
+        preparedStatement.setInt(1, userId);
+
+        rs=preparedStatement.executeQuery();
+
+        while (rs.next())
+        {
+            course = new Course(rs.getString("name"),rs.getInt("dita"),rs.getString("orari"));
+            course.setId(rs.getInt("id"));
+            courses.add(course);
+        }
+
+        preparedStatement.close();
+
+        return courses;
+    }
+
 }

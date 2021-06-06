@@ -150,4 +150,18 @@ public class MainViewController implements Initializable, ControllerClass {
         }
 
     }
+
+    public void checkCoursesCalendar()
+    {
+        int userId = Session.userSession.getId();
+
+        try {
+            sceneChanger.createStage("/view/calendar/fullCalendar.fxml","Calendar",userId,logoutButton);
+
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            ErrorHandler.generateError("Internal Not Found Stage error",()->{});
+        }
+    }
 }
