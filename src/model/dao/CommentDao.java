@@ -33,31 +33,36 @@ public class CommentDao {
         preparedStatement.close();
     }
 
-    public Comment getCommentsByCourse(int courseId) throws SQLException {
+    public static List<Comment> getCommentsByCourse(Integer courseId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
-        Comment comment = null;
+        List<Comment> comments = new ArrayList<Comment>();
+
         PreparedStatement preparedStatement;
+
+        Comment comment = null;
 
         if(connection == null)
             throw new SQLException("There is no established connection");
 
-        String mysql = "SELECT * FROM comment WHERE course_id = ? " +
-                "INNER JOIN user ON user.id = comment.id_user";
+        String mysql = "SELECT * FROM comment " +
+                "INNER JOIN user ON user.id = comment.id_user " +
+                "WHERE id_course = ?";
         preparedStatement = connection.prepareStatement(mysql);
         preparedStatement.setInt(1, courseId);
 
         rs = preparedStatement.executeQuery();
 
-        if(rs.next())
+        while(rs.next())
         {
             comment = new Comment(rs.getInt("id_thread"), rs.getInt("id_course"), rs.getInt("id_user"), rs.getInt("comment_type"), rs.getString("comment_body"), rs.getInt("no_of_likes"));
             comment.setId(rs.getInt("id"));
             comment.setUser_name(rs.getString("name"));
+            comments.add(comment);
         }
 
         preparedStatement.close();
-        return comment;
+        return comments;
     }
 
     public Integer getLikes(Integer commentId) throws SQLException {
@@ -102,7 +107,7 @@ public class CommentDao {
         preparedStatement.close();
     }
 
-    public List<Comment> getRepliesByComment(int threadId) throws SQLException {
+    public static List<Comment> getRepliesByComment(Integer threadId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
         List<Comment> replies = new ArrayList<Comment>();
@@ -113,8 +118,9 @@ public class CommentDao {
         if(connection == null)
             throw new SQLException("There is no connection established");
 
-        String mysql = "SELECT * FROM comment WHERE id_thread = ? "+
-                "INNER JOIN user ON user.id = comment.id_user";
+        String mysql = "SELECT * FROM comment "+
+                "INNER JOIN user ON user.id = comment.id_user "+
+                "WHERE id_thread = ?";
 
         preparedStatement = connection.prepareStatement(mysql);
         preparedStatement.setInt(1, threadId);
