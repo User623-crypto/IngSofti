@@ -27,12 +27,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        User a = new User("Luka","Laka");
-        try{
-            a.setImageFile(new File("./src/res/yugi.png"));
-            a.saveImageFileLocally();
-        }catch (Exception e){ System.out.println(e.getMessage());}
-
         primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
             try {
                 Connection connection = DatabaseManager.getConnection();

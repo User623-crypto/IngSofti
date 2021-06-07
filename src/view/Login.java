@@ -1,5 +1,6 @@
 package view;
 
+import com.jfoenix.controls.JFXButton;
 import error.ErrorHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,9 +25,14 @@ public class Login implements Initializable {
     @FXML
     Label errorLabel;
     SceneChanger sceneChanger = new SceneChanger();
+    @FXML
+    JFXButton albBtn;
+    @FXML JFXButton engBtn;
+    @FXML Label languageLabel;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        albBtn.setDisable(true);
+        Session.isInEnglish = false;
     }
 
     /**
@@ -67,6 +73,22 @@ public class Login implements Initializable {
         }catch (Exception e)
         {
             errorLabel.setText(e.getMessage());
+        }
+    }
+
+    public void toggleButton()
+    {
+        if (albBtn.isDisable())
+        {
+            albBtn.setDisable(false);
+            Session.isInEnglish=false;
+            engBtn.setDisable(true);
+            languageLabel.setText("Gjuha");
+        }else {
+            albBtn.setDisable(true);
+            Session.isInEnglish=true;
+            engBtn.setDisable(false);
+            languageLabel.setText("Language");
         }
     }
 }
