@@ -1,5 +1,6 @@
 package view.user;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import error.ErrorHandler;
 import javafx.event.ActionEvent;
@@ -25,6 +26,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditViewController implements Initializable, ControllerClass {
+
+    @FXML
+    JFXButton albBtn;
+    @FXML JFXButton engBtn;
+    @FXML Label languageLabel;
+
     @FXML private
     Label name;
     @FXML private Label errorLabel;
@@ -47,6 +54,17 @@ public class EditViewController implements Initializable, ControllerClass {
         user = Session.userSession.copyUser();
         noNotification.setToggleGroup(notificationGroup);
         yesNotification.setToggleGroup(notificationGroup);
+
+        if (Session.isInEnglish)
+        {
+            engBtn.setDisable(true);
+            languageLabel.setText("Gjuha");
+        }else {
+            albBtn.setDisable(true);
+            languageLabel.setText("Language");
+
+        }
+
     }
 
     @Override
@@ -133,6 +151,24 @@ public class EditViewController implements Initializable, ControllerClass {
         }
 
 
+    }
+
+    public void toggleButton()
+    {
+        //Do te thote eng is disabled dhe alb is enabled
+        if (Session.isInEnglish)
+        {
+            albBtn.setDisable(true);
+            Session.isInEnglish=false;
+            engBtn.setDisable(false);
+            languageLabel.setText("Language");
+        }else {
+            //Do te thote qe alb is disabled dhe eng is enabled
+            albBtn.setDisable(false);
+            Session.isInEnglish=true;
+            engBtn.setDisable(true);
+            languageLabel.setText("Gjuha");
+        }
     }
 
 }

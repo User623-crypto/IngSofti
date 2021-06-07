@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -42,6 +43,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Name" />
@@ -53,6 +55,13 @@
                            <children>
                               <JFXRadioButton fx:id="yesNotification" prefHeight="21.0" prefWidth="77.0" text="On" />
                               <JFXRadioButton fx:id="noNotification" text="Off" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="languageLabel" text="Language" GridPane.rowIndex="3" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <JFXButton fx:id="engBtn" onAction="#toggleButton" text="English" />
+                              <JFXButton fx:id="albBtn" onAction="#toggleButton" text="Shqip" />
                            </children>
                         </HBox>
                      </children>
