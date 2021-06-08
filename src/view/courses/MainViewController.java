@@ -41,25 +41,25 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable, ControllerClass {
     @FXML
-    private JFXListView<User> usersInCourseList;
+    public JFXListView<User> usersInCourseList;
     ObservableList<User> attendee = FXCollections.observableArrayList();
 
-    private List<Comment> comments = new ArrayList<>();
+    public List<Comment> comments = new ArrayList<>();
 
     @FXML
-    private Label nameLabel;
-    @FXML private Label
+    public Label nameLabel;
+    @FXML public Label
             dayLabel;
-    @FXML private Label timeLabel;
+    @FXML public Label timeLabel;
     @FXML
-    private Button enrollButton;
-    @FXML private Button dropButton;
+    public Button enrollButton;
+    @FXML public Button dropButton;
 
-    private Course selectedCourse;
-    private boolean isEnrolled;
+    public Course selectedCourse;
+    public boolean isEnrolled;
 
     @FXML
-    private VBox commentSection;
+    public VBox commentSection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

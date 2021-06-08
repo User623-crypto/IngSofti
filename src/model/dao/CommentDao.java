@@ -12,6 +12,12 @@ import java.util.List;
 
 public class CommentDao {
 
+    /**
+     * Insert an entry into comment table in db
+     * @param comment The comment object
+     * @throws SQLException throws error if there is no connection
+     * @throws IllegalArgumentException throws error if there is an illegal argument
+     */
     public void insertIntoDB(Comment comment) throws SQLException, IllegalArgumentException {
         Connection connection = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
@@ -33,6 +39,12 @@ public class CommentDao {
         preparedStatement.close();
     }
 
+    /**
+     * Reads from database a list of comments for a course
+     * @param courseId The course id
+     * @return List of comments
+     * @throws SQLException throws error if there is no connection
+     */
     public static List<Comment> getCommentsByCourse(Integer courseId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
@@ -65,6 +77,12 @@ public class CommentDao {
         return comments;
     }
 
+    /**
+     * Get likes number of a comment from db
+     * @param commentId Comment id
+     * @return returns the likes number
+     * @throws SQLException throws error if there is no connection
+     */
     public Integer getLikes(Integer commentId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
@@ -89,6 +107,12 @@ public class CommentDao {
         return no_of_likes;
     }
 
+    /**
+     * Update likes number of a comment in the database by 1
+     * @param commentId comment id
+     * @throws SQLException throws error if there is no connection
+     */
+
     public void addLikeToComment(Integer commentId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
@@ -107,6 +131,12 @@ public class CommentDao {
         preparedStatement.close();
     }
 
+    /**
+     * Get a list of replies for a certain comment
+     * @param threadId the main comments
+     * @return List of comments
+     * @throws SQLException throws error if there is no connection
+     */
     public static List<Comment> getRepliesByComment(Integer threadId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;

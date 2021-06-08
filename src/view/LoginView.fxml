@@ -41,9 +41,9 @@
                                 </HBox>
                             </children>
                         </VBox>
-                        <JFXButton layoutX="254.0" layoutY="379.0" onAction="#loginButtonPushed" style="-fx-background-color: #ffe0b2;" text="Login" />
+                        <JFXButton fx:id="loginBtn" layoutX="254.0" layoutY="379.0" onAction="#loginButtonPushed" style="-fx-background-color: #ffe0b2;" text="Login" />
                         <Label fx:id="errorLabel" layoutX="118.0" layoutY="462.0" textFill="#bf0808" />
-                  <JFXButton layoutX="159.0" layoutY="379.0" onAction="#signupButtonPushed" style="-fx-background-color: #ffe0b2;" text="Sign Up" />
+                  <JFXButton fx:id="signUpBtn" layoutX="159.0" layoutY="379.0" onAction="#signupButtonPushed" style="-fx-background-color: #ffe0b2;" text="Sign Up" />
                   <HBox alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="55.0" prefWidth="391.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0">
                      <children>
                         <Label fx:id="languageLabel" text="Language" />

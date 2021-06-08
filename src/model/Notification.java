@@ -7,6 +7,11 @@ public class Notification {
     private boolean active;
     public static final int NOTIFICATION_DISMISS = 0;
 
+    /**
+     * Notification Constructor
+     * @param notification the inner text that will show in the notification
+     */
+
     public Notification(String notification) {
         this.notification = notification;
     }

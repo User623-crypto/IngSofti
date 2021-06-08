@@ -1,12 +1,10 @@
 package model.dao;
 
 import model.FriendRequest;
-import model.Notification;
-import model.User;
+
 import zdatabase.DatabaseManager;
 import zextra.Session;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,10 +15,10 @@ import java.util.List;
 public class FriendRequestDao {
 
     /**
-     * Get all friend requests for a user
-     * @param userId
-     * @return
-     * @throws SQLException
+     * Get all friend requests for a user from db
+     * @param userId The userId that whose friends will be inserted in the list
+     * @return It returns a List of friends
+     * @throws SQLException throws exception if there is no connection with the db
      */
     public List<FriendRequest> getFriendsRequest(int userId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
@@ -30,7 +28,7 @@ public class FriendRequestDao {
 
         if (connection==null)
             throw new SQLException("Can not establish connection");
-        /**Sql code*/
+
         String mysql="select * from friend_request where user_receiver = ?;";
         preparedStatement=connection.prepareStatement(mysql);
         preparedStatement.setInt(1, userId);
@@ -57,6 +55,13 @@ public class FriendRequestDao {
         return friendRequestList;
     }
 
+    /**
+     * Inserts an entry in friendsrequest table
+     * @param senderId the sender id of the request
+     * @param receiverId the receiver id of the request
+     * @throws SQLException throw error if there is no connection
+     * @throws IllegalArgumentException throws error if there are any illegal arguments
+     */
     public void sendFriendRequest(int senderId,int receiverId) throws SQLException,IllegalArgumentException {
         Connection connection = DatabaseManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -139,6 +144,11 @@ public class FriendRequestDao {
         return areFriends;
     }
 
+    /**
+     * Inserts an entry in friends table
+     * @param friendRequest Takes the FriendRequest object
+     * @throws SQLException throws error if there is no connection with db
+     */
     public void acceptFriendRequest(FriendRequest friendRequest) throws SQLException{
 
         Connection connection = DatabaseManager.getConnection();
@@ -221,6 +231,11 @@ public class FriendRequestDao {
         }
     }
 
+    /**
+     * Removes entry from friendRequest table
+     * @param friendRequest The FriendRequest object that will be removed
+     * @throws SQLException Throws error if there is no connection
+     */
     public void rejectFriendRequest(FriendRequest friendRequest)throws  SQLException{
         Connection connection = DatabaseManager.getConnection();
         PreparedStatement preparedStatement = null;

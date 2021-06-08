@@ -20,7 +20,7 @@
             <children>
                 <JFXTabPane prefHeight="800.0" prefWidth="680.0" side="LEFT" style="-fx-tab-min-height: 150;" stylesheets="@../../styles/main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
-                  <Tab>
+                  <Tab fx:id="courseTab">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -58,7 +58,7 @@
                         </Label>
                      </graphic>
                   </Tab>
-                        <Tab>
+                        <Tab fx:id="timeLineTab">
                             <graphic>
                                 <Label cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="TimeLine">
                                     <font>

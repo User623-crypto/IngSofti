@@ -31,29 +31,32 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable, ControllerClass {
     @FXML
-    JFXListView<Notification> notificationList;
-    ObservableList<Notification> notificationListView = FXCollections.observableArrayList();
+    public JFXListView<Notification> notificationList;
+    public ObservableList<Notification> notificationListView = FXCollections.observableArrayList();
 
     @FXML
-    JFXListView<FriendRequest> friendRequestList;
-    ObservableList<FriendRequest> friendRequestListView = FXCollections.observableArrayList();
+    public JFXListView<FriendRequest> friendRequestList;
+    public ObservableList<FriendRequest> friendRequestListView = FXCollections.observableArrayList();
     @FXML
-    JFXButton logoutButton;
-    @FXML Label nameLabel;
+    public JFXButton logoutButton;
+    @FXML public Label nameLabel;
     @FXML
-    VBox timeLineContainer;
-    @FXML JFXTextArea postArea;
+    public VBox timeLineContainer;
+    @FXML public JFXTextArea postArea;
     SceneChanger sceneChanger = new SceneChanger();
 
     /**Courses Table Properties*/
-    @FXML private TableView<Course> courseTableView;
-    @FXML private TableColumn<Course,String> nameCol;
-    ObservableList<Course> courses = FXCollections.observableArrayList();
+    @FXML public TableView<Course> courseTableView;
+    @FXML public TableColumn<Course,String> nameCol;
+    public ObservableList<Course> courses = FXCollections.observableArrayList();
 
     /**Friends Table Properties*/
-    @FXML private TableView<User> friendsTable;
-    @FXML private TableColumn<User,String> friendNameCol;
-    ObservableList<User> friends = FXCollections.observableArrayList();
+    @FXML public TableView<User> friendsTable;
+    @FXML public TableColumn<User,String> friendNameCol;
+    public ObservableList<User> friends = FXCollections.observableArrayList();
+
+    @FXML JFXButton settingsButton;
+    @FXML JFXButton calendarBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

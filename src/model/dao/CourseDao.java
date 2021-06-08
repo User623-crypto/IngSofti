@@ -15,6 +15,11 @@ import java.util.List;
 
 public class CourseDao {
 
+    /**
+     * Returns all courses from the db
+     * @return List of Courses
+     * @throws SQLException throws exception if there is no connection
+     */
     public List<Course> readAllCourses() throws  SQLException{
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
@@ -41,6 +46,13 @@ public class CourseDao {
 
         return courses;
     }
+
+    /**
+     * Reads a course by id from the db
+     * @param id the course id
+     * @return returns a Course
+     * @throws SQLException throws error if there is no connection witht he db
+     */
     public Course readCourse(int id) throws SQLException
     {
         Connection connection = DatabaseManager.getConnection();
@@ -69,9 +81,9 @@ public class CourseDao {
 
     /**
      * Returns all the user from a course
-     * @param course
-     * @return
-     * @throws SQLException
+     * @param course Course object
+     * @return Return a list of users who belong to the course
+     * @throws SQLException it throws error if there is no connection with db
      */
     public List<User> readUsersInCourse(Course course) throws SQLException
     {
@@ -107,12 +119,18 @@ public class CourseDao {
         return users;
     }
 
+    /**
+     * Read courses from database by the day
+     * @param weekdayOrdinal the day of the course
+     * @return Returns a List of courses
+     * @throws SQLException throws exception if there is no connection with db
+     */
     public static List<Course> readCoursesByDay(int weekdayOrdinal) throws SQLException
     {
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
         List<Course> courses = new ArrayList<>();
-        Course course = null;
+        Course course ;
         PreparedStatement preparedStatement;
 
         if (connection==null)
@@ -135,11 +153,17 @@ public class CourseDao {
         return courses;
     }
 
+    /**
+     * Gets Courses of a user from db
+     * @param userId the user id
+     * @return List of courses of a certain user
+     * @throws SQLException throws error if there is no db connection
+     */
     public static List<Course> getCoursesByUser(int userId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
         List<Course> courses = new ArrayList<>();
-        Course course = null;
+        Course course ;
         PreparedStatement preparedStatement;
 
         if (connection==null)
@@ -163,6 +187,12 @@ public class CourseDao {
 
         return courses;
     }
+    /**
+     * Gets Courses of a user from db
+     * @param userId the user id
+     * @return List of courses of a certain user
+     * @throws SQLException throws error if there is no db connection
+     */
     public List<Course> readAllUserCourses(int userId) throws  SQLException{
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;

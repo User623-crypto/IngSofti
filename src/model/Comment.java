@@ -11,6 +11,15 @@ public class Comment {
     private Integer no_of_likes;
 
 
+    /**
+     * Comment constructor
+     * @param id_thread The main thread id
+     * @param id_course Which course does the comment belong
+     * @param id_user The user id that made the comment
+     * @param comment_type The comment type
+     * @param comment_body The comment inner body
+     * @param no_of_likes Number of likes of the comment
+     */
     public Comment(Integer id_thread, Integer id_course, Integer id_user, Integer comment_type, String comment_body, Integer no_of_likes) {
         this.id_thread = id_thread;
         this.id_course = id_course;

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
@@ -25,8 +26,8 @@ import java.util.ResourceBundle;
 public class ProfileViewController implements Initializable, ControllerClass {
     /**Courses Table Properties*/
     @FXML
-    private TableView<Course> courseTable;
-    @FXML private TableColumn<Course,String> courseName;
+    public TableView<Course> courseTable;
+    @FXML public TableColumn<Course,String> courseName;
     ObservableList<Course> courses = FXCollections.observableArrayList();
 
     @FXML
@@ -34,6 +35,10 @@ public class ProfileViewController implements Initializable, ControllerClass {
     @FXML
     VBox timeLineContainer;
     User selectedUser;
+
+    @FXML
+    Tab courseTab;
+    @FXML Tab timeLineTab;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
