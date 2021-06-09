@@ -12,11 +12,9 @@ import javafx.scene.layout.VBox;
 import model.Course;
 import model.Post;
 import model.User;
-import model.dao.FriendRequestDao;
 import model.dao.PostDao;
 import zextra.ControllerClass;
-import zextra.Session;
-import zextra.components.commentComponent.CommentComponent;
+import zextra.components.commentComponent.PostComponent;
 
 import java.net.URL;
 import java.util.List;
@@ -48,7 +46,7 @@ public class ProfileViewController implements Initializable, ControllerClass {
         try {
             List<Post> usersPosts = new PostDao().readPostsFromUser(selectedUser.getId());
             for (Post usersPost: usersPosts) {
-                timeLineContainer.getChildren().add(0,new CommentComponent(usersPost).getCommentContainer());
+                timeLineContainer.getChildren().add(0,new PostComponent(usersPost).getCommentContainer());
             }
 
         } catch (Exception exception) {

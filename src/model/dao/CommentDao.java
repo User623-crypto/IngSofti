@@ -1,18 +1,17 @@
 package model.dao;
 
 import model.Comment;
+import model.Helpers;
 import zdatabase.DatabaseManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CommentDao {
 
-    public void insertIntoDB(Comment comment) throws SQLException, IllegalArgumentException {
+    public Comment insertIntoDB(Comment comment) throws SQLException, IllegalArgumentException {
         Connection connection = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
 
@@ -20,122 +19,166 @@ public class CommentDao {
             throw new SQLException("There is no connection established");
 
         String mysql = "INSERT INTO comment "+
-                "(id_thread, id_course, id_user, comment_type, comment_body, no_of_likes) " +
-                "VALUES (?,?,?,?,?,0);";
-        preparedStatement = connection.prepareStatement(mysql);
-        preparedStatement.setInt(1, comment.getId_thread());
-        preparedStatement.setInt(2, comment.getId_course());
-        preparedStatement.setInt(3, comment.getId_user());
+                "(id_thread, id_course, id_user, comment_type, comment_body) " +
+                "VALUES (?,?,?,?,?);";
+        preparedStatement = connection.prepareStatement(mysql, Statement.RETURN_GENERATED_KEYS);
+
+        if(comment.getId_thread() == null)
+            preparedStatement.setNull(1, Types.NULL);
+        else
+            preparedStatement.setInt(1, comment.getId_thread());
+        if(comment.getId_course() == null)
+            preparedStatement.setNull(2, Types.NULL);
+        else
+            preparedStatement.setInt(2, comment.getId_course());
+        if(comment.getId_user() == null)
+            preparedStatement.setNull(3, Types.NULL);
+        else
+            preparedStatement.setInt(3, comment.getId_user());
         preparedStatement.setInt(4, comment.getComment_type());
         preparedStatement.setString(5, comment.getComment_body());
 
         preparedStatement.executeUpdate();
+        ResultSet rs = preparedStatement.getGeneratedKeys();
+        if (rs != null && rs.next()) {
+            comment.setId(rs.getInt(1));
+        }else throw new IllegalArgumentException("Cannot get the id");
+
+
+        preparedStatement.close();
+
+        return comment;
+    }
+
+    public Integer getLikes(Integer commentId) throws SQLException {
+        Connection connection = DatabaseManager.getConnection();
+        ResultSet rs;
+
+        PreparedStatement preparedStatement;
+
+        if(connection == null)
+            throw new SQLException("There is no established connection");
+
+        String mysql = "SELECT COUNT(*) AS rowcount FROM likes WHERE id_comment = ?;";
+        preparedStatement = connection.prepareStatement(mysql);
+        preparedStatement.setInt(1, commentId);
+
+        rs = preparedStatement.executeQuery();
+
+        rs.next();
+        int no_of_likes = rs.getInt("rowcount");
+
+
+        preparedStatement.close();
+        return no_of_likes;
+    }
+
+    public void addLikeToComment(Integer commentId, Integer userId) throws SQLException {
+        Connection connection = DatabaseManager.getConnection();
+        PreparedStatement preparedStatement;
+
+        if(connection == null)
+            throw new SQLException("There is no established connection");
+
+        String mysql = "INSERT INTO likes (id_comment, id_user) " +
+                        "VALUES (?,?);";
+        preparedStatement = connection.prepareStatement(mysql);
+        preparedStatement.setInt(1, commentId);
+        preparedStatement.setInt(2, userId);
+
+        preparedStatement.executeUpdate();
+
         preparedStatement.close();
     }
 
-    public static List<Comment> getCommentsByCourse(Integer courseId) throws SQLException {
+    public boolean checkIfLiked(Integer commentId, Integer userId) throws SQLException {
+        Connection connection = DatabaseManager.getConnection();
+        PreparedStatement preparedStatement;
+
+        if(connection == null)
+            throw new SQLException("There is no established connection");
+
+        String mysql = "SELECT COUNT(*) AS rowcount " +
+                        "FROM likes " +
+                        "WHERE id_comment = ? AND id_user = ?;";
+        preparedStatement = connection.prepareStatement(mysql);
+        preparedStatement.setInt(1, commentId);
+        preparedStatement.setInt(2, userId);
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        rs.next();
+        boolean liked = rs.getInt("rowcount") == 0;
+
+        preparedStatement.close();
+
+        return !liked;
+    }
+
+    public List<Comment> getComments(Integer commentType, Integer threadId, Integer courseId, Integer userId) throws SQLException{
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
         List<Comment> comments = new ArrayList<Comment>();
 
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement = null;
 
         Comment comment = null;
 
         if(connection == null)
             throw new SQLException("There is no established connection");
 
-        String mysql = "SELECT * FROM comment " +
-                "INNER JOIN user ON user.id = comment.id_user " +
-                "WHERE id_course = ?";
-        preparedStatement = connection.prepareStatement(mysql);
-        preparedStatement.setInt(1, courseId);
+        String mysql = "";
+        // Get comments on a course
+        if(commentType == Helpers.CommentType.BASIC_COMMENT.ordinal()) {
+            mysql = "SELECT * FROM comment " +
+                    "INNER JOIN user ON user.id = comment.id_user " +
+                    "WHERE id_course = ? AND comment_type = ?;";
+            preparedStatement = connection.prepareStatement(mysql);
+            preparedStatement.setInt(1, courseId);
+            preparedStatement.setInt(2, commentType);
+        }
+        // Get announcements on a course
+        if(commentType == Helpers.CommentType.ANNOUNCEMENT.ordinal()) {
+            mysql = "SELECT * FROM comment " +
+                    "WHERE id_course = ? AND comment_type = ?;";
+            preparedStatement = connection.prepareStatement(mysql);
+            preparedStatement.setInt(1, courseId);
+            preparedStatement.setInt(2, commentType);
+        }
+        // Get post updates by user
+        if(commentType == Helpers.CommentType.POST_UPDATE.ordinal()) {
+            mysql = "SELECT * FROM comment " +
+                    "INNER JOIN user ON user.id = comment.id_user " +
+                    "WHERE comment_type = ? AND id_user = ?;";
+            preparedStatement = connection.prepareStatement(mysql);
+            preparedStatement.setInt(1, courseId);
+            preparedStatement.setInt(2, commentType);
+            preparedStatement.setInt(3, userId);
+        }
+        // Get replies on a comment
+        if(commentType == Helpers.CommentType.REPLY.ordinal()){
+            mysql = "SELECT * FROM comment "+
+                    "INNER JOIN user ON user.id = comment.id_user "+
+                    "WHERE id_thread = ?";
+            preparedStatement = connection.prepareStatement(mysql);
+            preparedStatement.setInt(1, threadId);
+        }
+
 
         rs = preparedStatement.executeQuery();
 
         while(rs.next())
         {
-            comment = new Comment(rs.getInt("id_thread"), rs.getInt("id_course"), rs.getInt("id_user"), rs.getInt("comment_type"), rs.getString("comment_body"), rs.getInt("no_of_likes"));
+            comment = new Comment(rs.getInt("id_thread"), rs.getInt("id_course"), rs.getInt("id_user"), rs.getInt("comment_type"), rs.getString("comment_body"));
             comment.setId(rs.getInt("id"));
             comment.setUser_name(rs.getString("name"));
             comments.add(comment);
         }
 
         preparedStatement.close();
+        Collections.reverse(comments);
         return comments;
-    }
 
-    public Integer getLikes(Integer commentId) throws SQLException {
-        Connection connection = DatabaseManager.getConnection();
-        ResultSet rs;
-        int no_of_likes = 0;
-        PreparedStatement preparedStatement;
-
-        if(connection == null)
-            throw new SQLException("There is no established connection");
-
-        String mysql = "SELECT no_of_likes FROM comment WHERE id = ?;";
-        preparedStatement = connection.prepareStatement(mysql);
-        preparedStatement.setInt(1, commentId);
-
-        rs = preparedStatement.executeQuery();
-
-        if(rs.next())
-        {
-            no_of_likes = rs.getInt("no_of_likes");
-        }
-
-        preparedStatement.close();
-        return no_of_likes;
-    }
-
-    public void addLikeToComment(Integer commentId) throws SQLException {
-        Connection connection = DatabaseManager.getConnection();
-        PreparedStatement preparedStatement;
-
-        int new_no_of_likes = getLikes(commentId) + 1;
-
-        if(connection == null)
-            throw new SQLException("There is no established connection");
-
-        String mysql = "UPDATE comment SET no_of_likes=" + new_no_of_likes + " WHERE id = ?;";
-        preparedStatement = connection.prepareStatement(mysql);
-        preparedStatement.setInt(1, commentId);
-
-        preparedStatement.executeQuery();
-
-        preparedStatement.close();
-    }
-
-    public static List<Comment> getRepliesByComment(Integer threadId) throws SQLException {
-        Connection connection = DatabaseManager.getConnection();
-        ResultSet rs;
-        List<Comment> replies = new ArrayList<Comment>();
-        PreparedStatement preparedStatement;
-
-        Comment reply = null;
-
-        if(connection == null)
-            throw new SQLException("There is no connection established");
-
-        String mysql = "SELECT * FROM comment "+
-                "INNER JOIN user ON user.id = comment.id_user "+
-                "WHERE id_thread = ?";
-
-        preparedStatement = connection.prepareStatement(mysql);
-        preparedStatement.setInt(1, threadId);
-        rs = preparedStatement.executeQuery();
-
-        while(rs.next()){
-            reply = new Comment(rs.getInt("id_thread"), rs.getInt("id_course"), rs.getInt("id_user"), rs.getInt("comment_type"), rs.getString("comment_body"), rs.getInt("no_of_likes"));
-            reply.setId(rs.getInt("id"));
-            reply.setUser_name(rs.getString("name"));
-            replies.add(reply);
-        }
-
-        preparedStatement.close();
-
-        return replies;
     }
 
 }

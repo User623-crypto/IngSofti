@@ -1,9 +1,14 @@
 package view.calendar;
 
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import model.Course;
 import model.User;
@@ -76,8 +81,21 @@ public class FullCalendarView {
         titleBar.setAlignment(Pos.BASELINE_CENTER);
         // Populate calendar with the appropriate day numbers
         populateCalendar(yearMonth);
+
+        // Information about green days
+        HBox info = new HBox();
+
+        info.setPadding(new Insets(20));
+        Label greenBox = new Label();
+        greenBox.setPrefSize(30, 30);
+        greenBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.DEFAULT_WIDTHS)));
+        greenBox.setStyle("-fx-background-color: #52ff52");
+        Text infoText = new Text("Days with courses");
+        infoText.setFont(Font.font(18));
+        info.getChildren().add(greenBox);
+        info.getChildren().add(infoText);
         // Create the calendar view
-        view = new VBox(titleBar, dayLabels, calendar);
+        view = new VBox(titleBar, dayLabels, calendar, info);
     }
 
     /**

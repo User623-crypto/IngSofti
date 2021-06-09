@@ -8,16 +8,14 @@ public class Comment {
     private Integer comment_type;
     private String comment_body;
     private String user_name;
-    private Integer no_of_likes;
 
 
-    public Comment(Integer id_thread, Integer id_course, Integer id_user, Integer comment_type, String comment_body, Integer no_of_likes) {
+    public Comment(Integer id_thread, Integer id_course, Integer id_user, Integer comment_type, String comment_body) {
         this.id_thread = id_thread;
         this.id_course = id_course;
         this.id_user = id_user;
         this.comment_type = comment_type;
         this.comment_body = comment_body;
-        this.no_of_likes = no_of_likes;
     }
 
     public Integer getId() {
@@ -29,7 +27,7 @@ public class Comment {
     }
 
     public Integer getId_thread() {
-        return id_thread;
+        return id_thread == null ? null : id_thread;
     }
 
     public void setId_thread(Integer id_thread) {
@@ -37,7 +35,7 @@ public class Comment {
     }
 
     public Integer getId_course() {
-        return id_course;
+        return id_course == null ? null : id_course;
     }
 
     public void setId_course(Integer id_course) {
@@ -45,7 +43,7 @@ public class Comment {
     }
 
     public Integer getId_user() {
-        return id_user;
+        return id_user == null ? null : id_user;
     }
 
     public void setId_user(Integer id_user) {
@@ -78,11 +76,4 @@ public class Comment {
         this.user_name = user_name;
     }
 
-    public Integer getNo_of_likes() {
-        return no_of_likes;
-    }
-
-    public void setNo_of_likes(Integer no_of_likes) {
-        this.no_of_likes = no_of_likes;
-    }
 }

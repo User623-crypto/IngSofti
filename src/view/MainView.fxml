@@ -105,44 +105,7 @@
                                     <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
                                        <content>
                                           <VBox fx:id="timeLineContainer" prefHeight="332.0" prefWidth="585.0" spacing="10.0">
-                                             <children>
-                                                <HBox prefHeight="149.0" prefWidth="585.0" style="-fx-border-radius: 50; -fx-border-color: #4db6ac; -fx-border-width: 5 5 5 5;" VBox.vgrow="NEVER">
-                                                   <children>
-                                                      <VBox alignment="TOP_RIGHT" prefHeight="102.0" prefWidth="585.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                                                         <children>
-                                                            <JFXTextArea prefHeight="126.0" prefWidth="585.0">
-                                                               <padding>
-                                                                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                                                               </padding>
-                                                            </JFXTextArea>
-                                                            <JFXButton style="-fx-background-color: transparent;" text="Reply" textFill="#0033eb">
-                                                               <VBox.margin>
-                                                                  <Insets right="50.0" />
-                                                               </VBox.margin>
-                                                            </JFXButton>
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </HBox>
-                                                <HBox layoutX="10.0" layoutY="10.0" prefHeight="149.0" prefWidth="585.0" style="-fx-border-radius: 50; -fx-border-color: #4db6ac; -fx-border-width: 5 5 5 5;">
-                                                   <children>
-                                                      <VBox alignment="TOP_RIGHT" prefHeight="102.0" prefWidth="585.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                                                         <children>
-                                                            <JFXTextArea prefHeight="126.0" prefWidth="585.0">
-                                                               <padding>
-                                                                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                                                               </padding>
-                                                            </JFXTextArea>
-                                                            <JFXButton style="-fx-background-color: transparent;" text="Reply" textFill="#0033eb">
-                                                               <VBox.margin>
-                                                                  <Insets right="50.0" />
-                                                               </VBox.margin>
-                                                            </JFXButton>
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </HBox>
-                                             </children>
+
                                           </VBox>
                                        </content>
                                     </ScrollPane>

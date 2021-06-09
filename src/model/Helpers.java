@@ -14,4 +14,7 @@ public class Helpers {
         ANNOUNCEMENT,
         POST_UPDATE
     }
+    public static String ADD_COMMENT = "Add comment";
+    public static String ADD_REPLY = "Add reply";
+    public static String ADD_POST = "Add post";
 }

@@ -30,8 +30,7 @@ CREATE TABLE `comment` (
   `id_course` int unsigned DEFAULT NULL,
   `id_user` int unsigned DEFAULT NULL,
   `comment_type` tinyint unsigned DEFAULT 0,
-  `comment_body` varchar(255) DEFAULT NULL,
-  `no_of_likes` int unsigned DEFAULT '0',
+  `comment_body` varchar(255) DEFAULT NULL
   PRIMARY KEY (`id`),
   KEY `fk_comment_user_idx` (`id_user`),
   KEY `fk_comment_course_idx` (`id_course`),
@@ -46,13 +45,26 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` (`id_thread`, `id_course`, `id_user`, `comment_type`, `comment_body`, `no_of_likes`) VALUES
-    (NULL, 1, 1, 0, 'Koment1', 0),
-    (1, NULL, 2, 1, 'Reply1Koment1', 0),
-    (1, NULL, 3, 1, 'Reply2Koment1', 0),
-    (NULL, 1, 2, 0, 'Koment2', 0),
-    (4, NULL, 1, 1, 'Reply1Koment2', 0),
-    (4, NULL, 3, 1, 'Reply2Koment2', 1);
+INSERT INTO `comment` (`id_thread`, `id_course`, `id_user`, `comment_type`, `comment_body`) VALUES
+    (NULL, 1, 1, 0, 'Koment1'),
+    (1, NULL, 2, 1, 'Reply1Koment1'),
+    (1, NULL, 3, 1, 'Reply2Koment1'),
+    (NULL, 1, 2, 0, 'Koment2'),
+    (4, NULL, 1, 1, 'Reply1Koment2'),
+    (4, NULL, 3, 1, 'Reply2Koment2'),
+    (NULL, 1, 1, 0, 'Koment3'),
+    (NULL, 1, 1, 0, 'Koment4'),
+    (NULL, 1, 1, 0, 'Koment5'),
+    (NULL, 1, 1, 0, 'Koment6'),
+    (NULL, 1, 1, 0, 'Koment7'),
+    (NULL, 1, 1, 0, 'Koment8'),
+    (NULL, 1, 1, 0, 'Koment9'),
+    (NULL, 1, 1, 0, 'Koment10'),
+    (NULL, 1, 1, 0, 'Koment11'),
+    (NULL, 1, 1, 0, 'Koment12'),
+    (7, NULL, 1, 0, 'Reply1Koment3'),
+    (8, NULL, 1, 0, 'Reply1Koment4'),
+    (12, NULL, 1, 0, 'Reply1Koment8');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,6 +294,36 @@ LOCK TABLES `user_course` WRITE;
 /*!40000 ALTER TABLE `user_course` DISABLE KEYS */;
 INSERT INTO `user_course` VALUES (11,2,1),(17,1,1),(18,4,1),(20,4,3);
 /*!40000 ALTER TABLE `user_course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `user_course`
+--
+
+DROP TABLE IF EXISTS `likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `likes` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` int unsigned NOT NULL,
+  `id_comment` int unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user_idx` (`id_user`),
+  KEY `id_comment_idx` (`id_comment`),
+  CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`),
+  CONSTRAINT `id_comment` FOREIGN KEY (`id_comment`) REFERENCES `comment` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `likes`
+--
+
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (1,1,1),(2,2,1),(3,3,1),(4,2,3);
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

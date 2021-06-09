@@ -9,12 +9,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.*;
+import model.dao.CommentDao;
 import model.dao.FriendRequestDao;
 import model.dao.NotificationDao;
 import model.dao.PostDao;
@@ -22,6 +20,7 @@ import zextra.ControllerClass;
 import zextra.SceneChanger;
 import zextra.Session;
 import zextra.components.commentComponent.CommentComponent;
+import zextra.components.commentComponent.PostComponent;
 import zextra.components.jfx_list_component.FriendRequestCell;
 import zextra.components.jfx_list_component.NotificationCell;
 
@@ -79,13 +78,13 @@ public class MainViewController implements Initializable, ControllerClass {
         }
         try {
             friendRequestListView.addAll(new FriendRequestDao().getFriendsRequest(Session.userSession.getId()));
-            List<Post> usersPosts = new PostDao().readPostsFromUser(Session.userSession.getId());
-            for (Post usersPost: usersPosts) {
+            List<Comment> usersPosts = new CommentDao().getComments(Helpers.CommentType.POST_UPDATE.ordinal(), 0, 0, Session.userSession.getId());
+            for (Comment usersPost: usersPosts) {
                 timeLineContainer.getChildren().add(0,new CommentComponent(usersPost).getCommentContainer());
             }
 
         } catch (Exception exception) {
-            ErrorHandler.generateError("Oops couldn't load the notification",()->{});
+            ErrorHandler.generateError("Oops couldn't friend req /user posts",()->{});
         }
 
 
@@ -118,6 +117,21 @@ public class MainViewController implements Initializable, ControllerClass {
         }
     }
 
+    public void postButtonPushed()
+    {
+        Comment newPost = new Comment(null, null, Session.userSession.getId(), Helpers.CommentType.POST_UPDATE.ordinal(), postArea.getText());
+
+        try {
+            new CommentDao().insertIntoDB(newPost);
+            timeLineContainer.getChildren().add(0,new CommentComponent(newPost).getCommentContainer());
+        }catch (Exception e)
+        {
+            ErrorHandler.generateError("Oops something went wrong",()->{});
+            e.printStackTrace();
+        }
+
+    }
+
     public void checkCoursesDetail()
     {
         Course a = courseTableView.getSelectionModel().getSelectedItem();
@@ -135,21 +149,6 @@ public class MainViewController implements Initializable, ControllerClass {
         }
     }
 
-    public void postButtonPushed()
-    {
-        Post newPost = new Post(0,postArea.getText());
-        newPost.setPost_user(Session.userSession.getId());
-        try {
-            newPost = new PostDao().insertPostAndReturn(newPost);
-            timeLineContainer.getChildren().add(0,new CommentComponent(newPost).getCommentContainer());
-
-        }catch (Exception e)
-        {
-            ErrorHandler.generateError("Oops something went wrong",()->{});
-            e.printStackTrace();
-        }
-
-    }
 
     public void checkCoursesCalendar()
     {
