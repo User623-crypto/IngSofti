@@ -27,7 +27,7 @@ public class UserDao {
         if (connectionM == null)
             throw new SQLException("There is no connection established");
 
-        /**Should add code if exist throw error**/
+        //Should add code if exist throw error
         User a = readUserByName(user.getName());
         if (a!=null) {
             throw new IllegalArgumentException("This used does not exist");
@@ -60,7 +60,7 @@ public class UserDao {
      *
      * @param name Then name that will search the database
      * @return It will get the user from the database and it will return it
-     * @throws SQLException
+     * @throws SQLException throws error if there is no connection with db
      */
     public User readUserByName(String name) throws SQLException
     {
@@ -71,7 +71,6 @@ public class UserDao {
 
         if (connection==null)
             throw new SQLException("Can not establish connection");
-        /**Sql code*/
         String mysql="select * from user where name = ?;";
         preparedStatement=connection.prepareStatement(mysql);
         preparedStatement.setString(1, name);
@@ -100,7 +99,6 @@ public class UserDao {
 
         if (connection==null)
             throw new SQLException("Can not establish connection");
-        /**Sql code*/
         String mysql="select * from user where id = ?;";
         preparedStatement=connection.prepareStatement(mysql);
         preparedStatement.setInt(1, id);
@@ -123,7 +121,7 @@ public class UserDao {
     /**
      * It will update the user
      * @param user The modified user that will be updated
-     * @throws SQLException
+     * @throws SQLException throws error if there is no connection with db
      */
     public void updateFromDb(User user)throws SQLException
     {
@@ -151,15 +149,13 @@ public class UserDao {
 
         if (connection==null)
             throw new SQLException("Can not establish connection");
-        /**Sql code*/
         String mysql="select * from user where name = ?;";
         preparedStatement=connection.prepareStatement(mysql);
         preparedStatement.setString(1, name);
 
         rs=preparedStatement.executeQuery();
 
-        if (rs.next()) doesExist = true;
-        else doesExist = false;
+        doesExist = rs.next();
 
 
         preparedStatement.close();
@@ -169,8 +165,8 @@ public class UserDao {
 
     /**
      * This function checks if the user is enrolled in a course.
-     * @param userId
-     * @param courseId
+     * @param userId The user id
+     * @param courseId The course id
      * @return true if it is enrolled and false if it isnt
      * @throws SQLException There may be a problem with connection since it is outside db
      */
@@ -182,7 +178,6 @@ public class UserDao {
 
         if (connection==null)
             throw new SQLException("Can not establish connection");
-        /**Sql code*/
         String mysql="select * from user_course where user_id=? and course_id=?;";
         preparedStatement=connection.prepareStatement(mysql);
         preparedStatement.setInt(1, userId);
@@ -190,8 +185,7 @@ public class UserDao {
 
         rs=preparedStatement.executeQuery();
 
-        if (rs.next()) doesExist = true;
-        else doesExist = false;
+        doesExist = rs.next();
 
 
         preparedStatement.close();
@@ -228,6 +222,13 @@ public class UserDao {
 
     }
 
+    /**
+     * It removes a user from a course in DB
+     * @param userId the user id
+     * @param courseId the course id
+     * @throws SQLException throw exception if there is no connection to db
+     */
+
     public void deleteUserFromCourse(int userId,int courseId) throws SQLException{
         Connection connectionM = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
@@ -247,6 +248,12 @@ public class UserDao {
         preparedStatement.close();
     }
 
+    /**
+     * Gets a list of user that are friends with the user passed in the parameter
+     * @param userId The id of the user whose friends will be added to the list
+     * @return Returns a list of user
+     * @throws SQLException throw exception if there is no connection to db
+     */
     public List<User> readAllUserFriends(int userId)throws SQLException
     {
         Connection connection = DatabaseManager.getConnection();

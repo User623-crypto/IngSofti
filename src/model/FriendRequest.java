@@ -7,6 +7,14 @@ public class FriendRequest {
     private User senderUser;
     private int state;
 
+
+    /**
+     * Constructor that will create a FriendRequest
+     * @param id Its the DB parameter
+     * @param userReceiverId The user who received the friend request
+     * @param userSenderId The user id who sent the friend request
+     * @param state the state of friend request 0 if it is active 1 if it is rejected
+     */
     public FriendRequest(int id, int userReceiverId, int userSenderId, int state) {
         this.id = id;
         this.userReceiverId = userReceiverId;

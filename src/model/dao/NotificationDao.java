@@ -42,7 +42,6 @@ public class NotificationDao {
 
         if (connection==null)
             throw new SQLException("Can not establish connection");
-        /**Sql code*/
         String mysql="select * from notification where user_main = ? and active=?;";
         preparedStatement=connection.prepareStatement(mysql);
         preparedStatement.setInt(1, userId);
@@ -64,6 +63,12 @@ public class NotificationDao {
 
         return notificationList;
     }
+
+    /**
+     * Send notification to all users friend. The user is taken from session
+     * @param text The inner text of the notification
+     * @throws SQLException Throws exception if there is no connection
+     */
 
     public void sendNotificationToFriends(String text)throws SQLException{
 

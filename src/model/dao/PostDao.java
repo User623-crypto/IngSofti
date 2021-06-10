@@ -11,7 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostDao {
-    public void insertIntoDB(Post post) throws SQLException, IllegalArgumentException {
+    /**
+     * This function inserts a post into database
+     * @param post the post that will be inserted
+     * @throws SQLException Error with the connection
+     */
+    public void insertIntoDB(Post post) throws SQLException {
         Connection connectionM = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
 
@@ -33,6 +38,13 @@ public class PostDao {
 
     }
 
+    /**
+     * This method inserts a Post and returns the post that it inserted from the database
+     * @param post the new post that will be inserted
+     * @return Returns a Post object
+     * @throws SQLException If there is problem with the connection
+     * @throws IllegalArgumentException Bad id argument
+     */
     public Post insertPostAndReturn(Post post) throws SQLException, IllegalArgumentException {
         Connection connectionM = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
@@ -66,6 +78,13 @@ public class PostDao {
 
     }
 
+    /**
+     * It reads a list of post from the db from a certain user
+     * @param userId The id of the user which post will be read
+     * @return It returns a List of Posts
+     * @throws SQLException Error connection with the database
+     */
+
     public List<Post> readPostsFromUser(int userId) throws SQLException{
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
@@ -95,6 +114,12 @@ public class PostDao {
         return posts;
     }
 
+    /**
+     * This function updates post's like in the db
+     * @param post_id Post id
+     * @param likeNumber the number of likes that will be added
+     * @throws SQLException Error connection with the database
+     */
     public void updateLikes(int post_id,int likeNumber)throws SQLException
     {
         Connection connection = DatabaseManager.getConnection();

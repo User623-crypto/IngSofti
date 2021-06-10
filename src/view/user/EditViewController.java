@@ -7,10 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -32,23 +29,28 @@ public class EditViewController implements Initializable, ControllerClass {
     @FXML JFXButton engBtn;
     @FXML Label languageLabel;
 
-    @FXML private
+    @FXML public
     Label name;
-    @FXML private Label errorLabel;
-    @FXML private
+    @FXML public Label errorLabel;
+    @FXML public
     TextField nameField;
-    @FXML private
+    @FXML public
     PasswordField passwordField;
-    @FXML private
+    @FXML public
     JFXRadioButton noNotification;
-    @FXML private JFXRadioButton yesNotification;
-    @FXML private ImageView image;
-    User user;
-    SceneChanger sceneChanger = new SceneChanger();
+    @FXML public JFXRadioButton yesNotification;
+    @FXML public ImageView image;
+    public User user;
+    public SceneChanger sceneChanger = new SceneChanger();
 
-    ToggleGroup notificationGroup = new ToggleGroup();
+    public ToggleGroup notificationGroup = new ToggleGroup();
 
-    boolean didChangeImage = false;
+    @FXML
+    Button goBackBtn;
+    @FXML
+    Button updateBtn;
+
+    public boolean didChangeImage = false;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         user = Session.userSession.copyUser();

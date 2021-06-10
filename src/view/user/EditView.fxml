@@ -83,8 +83,8 @@
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="93.0" prefWidth="800.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#goBack" text="Go Back" />
-                  <Button mnemonicParsing="false" onAction="#updateButtonPushed" prefHeight="31.0" prefWidth="103.0" text="Update">
+                  <Button fx:id="goBackBtn" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
+                  <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#updateButtonPushed" prefHeight="31.0" prefWidth="103.0" text="Update">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>

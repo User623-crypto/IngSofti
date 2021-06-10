@@ -26,6 +26,12 @@ public class User {
     private File imageFile;
 
 
+    /**
+     * User constructor that will initialize a user object
+     * @param name The user name
+     * @param password The user password
+     * @throws IllegalArgumentException It throws exception if the name or password is too long or too short
+     */
     public User(String name, String password) throws IllegalArgumentException{
         setName(name);
         setPassword(password);
@@ -85,7 +91,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        if (password.length()>45)
+        if (password.length()>45 || password.length()<2)
             throw new IllegalArgumentException("Fjalekalimi Nuk mund te jete kaq i gjate");
         this.password = password;
     }
@@ -111,6 +117,13 @@ public class User {
     public String toString() {
         return name;
     }
+
+    /**
+     * This function initialize a TableView with  the users from the db
+     * @param friendsTable The table that will be initialized
+     * @param nameCol The column that will hold the names
+     * @param friends the list that will interact with the table
+     */
 
     public static void initFriendsTable(TableView<User> friendsTable, TableColumn<User,String> nameCol,
                                         ObservableList<User> friends)

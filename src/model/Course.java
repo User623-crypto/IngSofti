@@ -16,6 +16,12 @@ public class Course {
     private int day;
     private String time;
 
+    /**
+     * Course constructor
+     * @param name The name of the course
+     * @param day A day in the weekend 1 to 7
+     * @param time The time the course starts
+     */
     public Course(String name, int day, String time) {
         this.name = name;
         this.day = day;
@@ -54,6 +60,12 @@ public class Course {
         this.time = time;
     }
 
+    /**
+     * This function initialize a TableView with all the courses from the db
+     * @param coursesTable The GUI element that will be initialized
+     * @param nameCol The col where it will write the course name
+     * @param courses The list that will hold the courses
+     */
     public static void initCoursesTable(TableView<Course> coursesTable, TableColumn<Course,String> nameCol,
                                           ObservableList<Course> courses)
     {
@@ -82,6 +94,13 @@ public class Course {
         }
     }
 
+    /**
+     * This function initialize a TableView with  the courses from the db for a certain user
+     * @param coursesTable The GUI element that will be initialized
+     * @param nameCol The col where it will write the course name
+     * @param courses The list that will hold the courses
+     * @param userId the user id that will has inrolled in the courses
+     */
     public static void initCoursesTable(TableView<Course> coursesTable, TableColumn<Course,String> nameCol,
                                         ObservableList<Course> courses,int userId)
     {

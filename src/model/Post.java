@@ -6,6 +6,11 @@ public class Post {
     private String text;
     private int post_user;
 
+    /**
+     * Post constructor
+     * @param likeNumber the like number of the current post
+     * @param text The inner text of the Post
+     */
     public Post(int likeNumber, String text) {
         this.likeNumber = likeNumber;
         this.text = text;
