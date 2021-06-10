@@ -30,7 +30,8 @@ public class CommentComponent {
     VBox repliesContainer;
     VBox commentVBox;
 
-    SceneChanger sc = new SceneChanger();
+    List<Comment> replies = new ArrayList<>();
+
 
 
     boolean showReplies = false;
@@ -118,7 +119,9 @@ public class CommentComponent {
         });
 
         replyButton.setOnAction(evt -> {
-            new AddCommentComponent(Helpers.CommentType.REPLY.ordinal(), c.getId(), Session.userSession.getId());
+            AddCommentComponent added = new AddCommentComponent(Helpers.CommentType.REPLY.ordinal(), c.getId(), Session.userSession.getId(), replies);
+//            repliesContainer = getRepliesVBox(c);
+            repliesContainer.getChildren().add(0, added.AddedCommentContainer());
         });
 
         commentContainer.getChildren().add(repliesContainer);
@@ -129,7 +132,6 @@ public class CommentComponent {
 
     public VBox getRepliesVBox(Comment c) {
         repliesContainer = new VBox();
-        List<Comment> replies = new ArrayList<>();
 
         try {
             replies = new CommentDao().getComments(Helpers.CommentType.REPLY.ordinal(), c.getId(), c.getId_course(), null);
@@ -208,6 +210,8 @@ public class CommentComponent {
 
         return  repliesContainer;
     }
+
+
 
     public boolean isShowReplies() {
         return showReplies;
