@@ -84,16 +84,6 @@
                            <children>
                               <VBox prefHeight="473.0" prefWidth="585.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <HBox prefHeight="149.0" prefWidth="585.0">
-                                       <children>
-                                          <VBox alignment="TOP_RIGHT" prefHeight="102.0" prefWidth="585.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                                             <children>
-                                                <JFXTextArea fx:id="postArea" prefHeight="126.0" prefWidth="585.0" />
-                                                <JFXButton onAction="#postButtonPushed" style="-fx-background-color: #4db6ac;" text="Post" textFill="WHITE" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
                                        <content>
                                           <VBox fx:id="timeLineContainer" prefHeight="332.0" prefWidth="585.0" spacing="10.0">

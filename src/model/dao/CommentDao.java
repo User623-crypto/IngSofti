@@ -3,6 +3,7 @@ package model.dao;
 import model.Comment;
 import model.Helpers;
 import zdatabase.DatabaseManager;
+import zextra.Session;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class CommentDao {
 
 
         preparedStatement.close();
+
+        comment.setUser_name(Session.userSession.getName());
 
         return comment;
     }
@@ -151,9 +154,8 @@ public class CommentDao {
                     "INNER JOIN user ON user.id = comment.id_user " +
                     "WHERE comment_type = ? AND id_user = ?;";
             preparedStatement = connection.prepareStatement(mysql);
-            preparedStatement.setInt(1, courseId);
-            preparedStatement.setInt(2, commentType);
-            preparedStatement.setInt(3, userId);
+            preparedStatement.setInt(1, commentType);
+            preparedStatement.setInt(2, userId);
         }
         // Get replies on a comment
         if(commentType == Helpers.CommentType.REPLY.ordinal()){

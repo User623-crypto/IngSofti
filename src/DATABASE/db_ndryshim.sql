@@ -30,7 +30,7 @@ CREATE TABLE `comment` (
   `id_course` int unsigned DEFAULT NULL,
   `id_user` int unsigned DEFAULT NULL,
   `comment_type` tinyint unsigned DEFAULT 0,
-  `comment_body` varchar(255) DEFAULT NULL
+  `comment_body` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_comment_user_idx` (`id_user`),
   KEY `fk_comment_course_idx` (`id_course`),
@@ -298,7 +298,7 @@ UNLOCK TABLES;
 
 
 --
--- Table structure for table `user_course`
+-- Table structure for table `likes`
 --
 
 DROP TABLE IF EXISTS `likes`;

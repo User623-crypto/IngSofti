@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import language.LanguageController;
 import model.Comment;
 import model.Course;
 import model.Helpers;
@@ -19,6 +20,7 @@ import model.dao.CourseDao;
 import model.dao.UserDao;
 import zextra.ControllerClass;
 import zextra.Session;
+import zextra.components.commentComponent.AddCommentComponent;
 import zextra.components.commentComponent.CommentComponent;
 import zextra.components.jfx_list_component.FriendsCell;
 
@@ -29,29 +31,32 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable, ControllerClass {
+    LanguageController lang = new LanguageController();
+    public String ADD_COMMENT_TEXT = lang.ADD_COMMENT_TEXT;
+
     @FXML
-    private JFXListView<User> usersInCourseList;
+    public JFXListView<User> usersInCourseList;
     ObservableList<User> attendee = FXCollections.observableArrayList();
 
-    private List<Comment> comments = new ArrayList<>();
-    private List<Comment> announcements = new ArrayList<>();
+    public List<Comment> comments = new ArrayList<>();
+    public List<Comment> announcements = new ArrayList<>();
 
     @FXML
-    private Label nameLabel;
-    @FXML private Label
+    public Label nameLabel;
+    @FXML public Label
             dayLabel;
-    @FXML private Label timeLabel;
+    @FXML public Label timeLabel;
     @FXML
-    private Button enrollButton;
-    @FXML private Button dropButton;
+    public Button enrollButton;
+    @FXML public Button dropButton;
 
-    private Course selectedCourse;
-    private boolean isEnrolled;
+    public Course selectedCourse;
+    public boolean isEnrolled;
 
     @FXML
-    private VBox commentSection;
+    public VBox commentSection;
     @FXML
-    private VBox announcementSection;
+    public VBox announcementSection;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,6 +84,15 @@ public class MainViewController implements Initializable, ControllerClass {
             ErrorHandler.generateError("There is a Grave error try again late ", Platform::exit);
         }
 
+        Button addComment = new Button(ADD_COMMENT_TEXT);
+
+        commentSection.getChildren().add(addComment);
+
+        addComment.setOnAction(evt -> {
+            AddCommentComponent added = new AddCommentComponent(Helpers.CommentType.BASIC_COMMENT.ordinal(), null, Session.userSession.getId());
+            commentSection.getChildren().add(1, new CommentComponent(added.getNewComment()).getCommentContainer());
+        });
+
 
         for (Comment c : comments) {
             commentSection.getChildren().add(new CommentComponent(c).getCommentContainer());
@@ -96,7 +110,7 @@ public class MainViewController implements Initializable, ControllerClass {
      * drop button visible if the user is enrolled
      * @param isEnrolled is the student enrolled in the course
      */
-    private void toggleEnrollButton(boolean isEnrolled)
+    public void toggleEnrollButton(boolean isEnrolled)
     {
         enrollButton.setVisible(!isEnrolled);
         dropButton.setVisible(isEnrolled);

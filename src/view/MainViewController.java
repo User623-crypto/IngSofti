@@ -81,7 +81,7 @@ public class MainViewController implements Initializable, ControllerClass {
         }
         try {
             friendRequestListView.addAll(new FriendRequestDao().getFriendsRequest(Session.userSession.getId()));
-            List<Comment> usersPosts = new CommentDao().getComments(Helpers.CommentType.POST_UPDATE.ordinal(), 0, 0, Session.userSession.getId());
+            List<Comment> usersPosts = new CommentDao().getComments(Helpers.CommentType.POST_UPDATE.ordinal(), null, null, Session.userSession.getId());
             for (Comment usersPost: usersPosts) {
                 timeLineContainer.getChildren().add(0,new CommentComponent(usersPost).getCommentContainer());
             }
@@ -120,20 +120,6 @@ public class MainViewController implements Initializable, ControllerClass {
         }
     }
 
-    public void postButtonPushed()
-    {
-        Comment newPost = new Comment(null, null, Session.userSession.getId(), Helpers.CommentType.POST_UPDATE.ordinal(), postArea.getText());
-
-        try {
-            new CommentDao().insertIntoDB(newPost);
-            timeLineContainer.getChildren().add(0,new CommentComponent(newPost).getCommentContainer());
-        }catch (Exception e)
-        {
-            ErrorHandler.generateError("Oops something went wrong",()->{});
-            e.printStackTrace();
-        }
-
-    }
 
     public void checkCoursesDetail()
     {
