@@ -98,7 +98,7 @@ public class AddCommentComponent {
         stage.showAndWait();
 
         cancel.setOnAction(evt -> {
-            stage.close();
+            stage.getScene().getWindow().hide();
         });
     }
 

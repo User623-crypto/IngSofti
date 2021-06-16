@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import model.Comment;
 import model.Course;
-import model.Post;
+import model.Helpers;
 import model.User;
 import zdatabase.DatabaseManager;
 import zextra.Session;
@@ -216,9 +217,9 @@ public class UserDao {
 
         new NotificationDao().sendNotificationToFriends(Session.userSession.getName()+" has enrolled in "+
                 course.getName());
-        Post newPost = new Post(0,"Wow this "+course.getName()+" is Amaizing");
-        newPost.setPost_user(Session.userSession.getId());
-        new PostDao().insertIntoDB(newPost);
+        Comment newPost = new Comment(null,null, userId, Helpers.CommentType.POST_UPDATE.ordinal(), "Wow this "+course.getName()+" is Amaizing");
+
+        new CommentDao().insertIntoDB(newPost);
 
     }
 

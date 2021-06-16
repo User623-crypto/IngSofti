@@ -25,7 +25,7 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="214.0" styleClass="sidebar" stylesheets="@../styles/main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label prefHeight="90.0" prefWidth="400.0" style="-fx-background-color: #4db6ac; -fx-font-family: Calibri;" text="Avatar" textFill="WHITE">
+            <Label prefHeight="90.0" prefWidth="400.0" fx:id="avatarLabel" style="-fx-background-color: #4db6ac; -fx-font-family: Calibri;" text="Avatar" textFill="WHITE">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -78,7 +78,7 @@
             <Separator prefWidth="200.0" />
             <JFXTabPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="585.0" prefWidth="222.0" stylesheets="@../styles/main.css" VBox.vgrow="ALWAYS">
                <tabs>
-                  <Tab text="Timeline">
+                  <Tab fx:id="timelineTab" text="Timeline">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -97,7 +97,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Friends">
+                  <Tab fx:id="friendsTab" text="Friends">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -111,7 +111,7 @@
                                  <contextMenu>
                                     <ContextMenu>
                                        <items>
-                                          <MenuItem mnemonicParsing="false" text="See Details" />
+                                          <MenuItem fx:id="seeDetailsMenu" mnemonicParsing="false" text="See Details" />
                                        </items>
                                     </ContextMenu>
                                  </contextMenu>
@@ -120,7 +120,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Maintest">
+                  <Tab fx:id="mainTest" text="Maintest">
                      <content>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="680.0">
                            <padding>
@@ -133,7 +133,7 @@
                                        <children>
                                           <HBox alignment="CENTER" layoutY="-29.0" prefHeight="71.0" prefWidth="247.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label text="Friend Request" />
+                                                <Label fx:id="friendRequestLabel" text="Friend Request" />
                                              </children></HBox>
                                           <JFXListView fx:id="friendRequestList" layoutX="-1.0" layoutY="65.0" prefHeight="386.0" prefWidth="247.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
                                        </children>
@@ -142,7 +142,7 @@
                                        <children>
                                           <HBox alignment="CENTER" layoutX="96.0" prefHeight="60.0" prefWidth="391.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label text="Notifications" />
+                                                <Label fx:id="notificationsLabel" text="Notifications" />
                                              </children></HBox>
                                           <JFXListView fx:id="notificationList" layoutX="89.0" layoutY="81.0" prefHeight="379.0" prefWidth="391.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                                        </children>
@@ -153,7 +153,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab text="Courses">
+                  <Tab fx:id="coursesTab" text="Courses">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -162,7 +162,7 @@
                                     <HBox alignment="CENTER" fillHeight="false" prefHeight="104.0" prefWidth="679.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <TextField fx:id="seachCourseTextBox" promptText="Math" />
-                                          <JFXButton alignment="TOP_LEFT" prefHeight="37.0" prefWidth="221.0" styleClass="btns" text="Search Course" textFill="#7c8184">
+                                          <JFXButton fx:id="searchCourseBtn" alignment="TOP_LEFT" prefHeight="37.0" prefWidth="221.0" styleClass="btns" text="Search Course" textFill="#7c8184">
                                              <graphic>
                                                 <FontAwesomeIconView fill="#d72ba6" glyphName="SEARCH" size="18" />
                                              </graphic>
@@ -184,7 +184,7 @@
                                  <contextMenu>
                                     <ContextMenu>
                                        <items>
-                                          <MenuItem mnemonicParsing="false" onAction="#checkCoursesDetail" text="Check Courses Details" />
+                                          <MenuItem fx:id="courseDetailsMenu" mnemonicParsing="false" onAction="#checkCoursesDetail" text="Check Courses Details" />
                                        </items>
                                     </ContextMenu>
                                  </contextMenu>

@@ -10,7 +10,6 @@ import model.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.*;
-import org.testfx.api.FxRobot;
 
 import zextra.Session;
 
@@ -64,7 +63,7 @@ class MainViewControllerTest {
 
     @Test void checkLoad()
     {
-        assertEquals(mainViewController.nameLabel.getText(),course.getName());
+        assertEquals(mainViewController.courseNameLabel.getText(),course.getName());
         assertEquals(mainViewController.timeLabel.getText(),course.getTime());
         if(mainViewController.attendee.isEmpty())
             fail("From the test db the course should have some attendee");

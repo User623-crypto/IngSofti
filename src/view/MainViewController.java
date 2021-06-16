@@ -9,18 +9,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import language.LanguageController;
 import model.*;
 import model.dao.CommentDao;
 import model.dao.FriendRequestDao;
 import model.dao.NotificationDao;
-import model.dao.PostDao;
 import zextra.ControllerClass;
 import zextra.SceneChanger;
 import zextra.Session;
+import zextra.components.commentComponent.AddCommentComponent;
 import zextra.components.commentComponent.CommentComponent;
-import zextra.components.commentComponent.PostComponent;
 import zextra.components.jfx_list_component.FriendRequestCell;
 import zextra.components.jfx_list_component.NotificationCell;
 
@@ -56,6 +58,18 @@ public class MainViewController implements Initializable, ControllerClass {
 
     @FXML JFXButton settingsButton;
     @FXML JFXButton calendarBtn;
+    @FXML Label avatarLabel;
+    @FXML Tab timelineTab;
+    @FXML Tab friendsTab;
+    @FXML MenuItem seeDetailsMenu;
+    @FXML Tab mainTest;
+    @FXML Label friendRequestLabel;
+    @FXML Label notificationsLabel;
+    @FXML Tab coursesTab;
+    @FXML JFXButton searchCourseBtn;
+    @FXML MenuItem courseDetailsMenu;
+
+    public LanguageController lang = new LanguageController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,11 +93,24 @@ public class MainViewController implements Initializable, ControllerClass {
                 ErrorHandler.generateError("Oops couldn't load the notification",()->{});
             }
         }
+
+        Button addComment = new Button(lang.ADD_POST_TEXT);
+        HBox commentHBox = new HBox();
+        commentHBox.setPadding(new Insets(20));
+        commentHBox.getChildren().add(addComment);
+        timeLineContainer.getChildren().add(commentHBox);
+
+
+        addComment.setOnAction(evt -> {
+            AddCommentComponent added = new AddCommentComponent(Helpers.CommentType.POST_UPDATE.ordinal(), null, null);
+            timeLineContainer.getChildren().add(1, new CommentComponent(added.getNewComment()).getCommentContainer());
+        });
+
         try {
             friendRequestListView.addAll(new FriendRequestDao().getFriendsRequest(Session.userSession.getId()));
             List<Comment> usersPosts = new CommentDao().getComments(Helpers.CommentType.POST_UPDATE.ordinal(), null, null, Session.userSession.getId());
             for (Comment usersPost: usersPosts) {
-                timeLineContainer.getChildren().add(0,new CommentComponent(usersPost).getCommentContainer());
+                timeLineContainer.getChildren().add(1,new CommentComponent(usersPost).getCommentContainer());
             }
 
         } catch (Exception exception) {
@@ -92,6 +119,22 @@ public class MainViewController implements Initializable, ControllerClass {
 
 
 
+
+        logoutButton.setText(lang.LOGOUT_TEXT);
+//        nameLabel.setText(lang.USERNAME_TEXT);
+        friendNameCol.setText(lang.FRIENDS_TEXT);
+        settingsButton.setText(lang.CONFIGURATION_TEXT);
+        calendarBtn.setText(lang.CALENDAR_TEXT);
+        avatarLabel.setText(lang.AVATAR_TEXT);
+        timelineTab.setText(lang.TIMELINE_TEXT);
+        friendsTab.setText(lang.FRIENDS_TEXT);
+        seeDetailsMenu.setText(lang.SEE_DETAILS_TEXT);
+//        mainTest.;
+        friendRequestLabel.setText(lang.FRIEND_REQUEST_TEXT);
+        notificationsLabel.setText(lang.NOTIFICATIONS_TEXT);
+        coursesTab.setText(lang.COURSES_TEXT);
+        searchCourseBtn.setText(lang.SEARCH_COURSES_TEXT);
+        nameCol.setText(lang.COURSES_TEXT);
     }
 
     public void LogoutButtonPushed(ActionEvent event) {
@@ -110,7 +153,7 @@ public class MainViewController implements Initializable, ControllerClass {
 
 
         try {
-            sceneChanger.changeScene(event,"/view/user/EditView.fxml","Settings",Session.userSession);
+            sceneChanger.changeScene(event,"/view/user/EditView.fxml",lang.CONFIGURATION_TEXT,Session.userSession);
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
@@ -129,7 +172,7 @@ public class MainViewController implements Initializable, ControllerClass {
             return;
         }
         try {
-            sceneChanger.createStage("/view/courses/MainView.fxml","Courses",a,logoutButton);
+            sceneChanger.createStage("/view/courses/MainView.fxml",lang.COURSES_TEXT,a,logoutButton);
 
         }catch (Exception e)
         {
@@ -144,7 +187,7 @@ public class MainViewController implements Initializable, ControllerClass {
         int userId = Session.userSession.getId();
 
         try {
-            sceneChanger.createStage("/view/calendar/fullCalendar.fxml","Calendar",userId,logoutButton);
+            sceneChanger.createStage("/view/calendar/fullCalendar.fxml",lang.CALENDAR_TEXT,userId,logoutButton);
 
         }catch (Exception e)
         {

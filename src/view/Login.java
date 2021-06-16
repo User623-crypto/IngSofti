@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import language.LanguageController;
 import model.User;
 import model.dao.UserDao;
 import zextra.SceneChanger;
@@ -33,10 +34,18 @@ public class Login implements Initializable {
     @FXML
     Button loginBtn;
     @FXML Button signUpBtn;
+
+    LanguageController lang = new LanguageController();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         albBtn.setDisable(true);
         Session.isInEnglish = false;
+        languageLabel.setText(lang.LANGUAGE_TEXT);
+        loginBtn.setText(lang.LOGIN_TEXT);
+        signUpBtn.setText(lang.SIGNUP_TEXT);
+        nameField.setPromptText(lang.USERNAME_TEXT);
+        passwordField.setPromptText(lang.PASSWORD_TEXT);
     }
 
     /**
@@ -88,13 +97,17 @@ public class Login implements Initializable {
             albBtn.setDisable(true);
             Session.isInEnglish=false;
             engBtn.setDisable(false);
-            languageLabel.setText("Language");
         }else {
             //Do te thote qe alb is disabled dhe eng is enabled
             albBtn.setDisable(false);
             Session.isInEnglish=true;
             engBtn.setDisable(true);
-            languageLabel.setText("Gjuha");
         }
+        lang = new LanguageController();
+        languageLabel.setText(lang.LANGUAGE_TEXT);
+        loginBtn.setText(lang.LOGIN_TEXT);
+        signUpBtn.setText(lang.SIGNUP_TEXT);
+        nameField.setPromptText(lang.USERNAME_TEXT);
+        passwordField.setPromptText(lang.PASSWORD_TEXT);
     }
 }

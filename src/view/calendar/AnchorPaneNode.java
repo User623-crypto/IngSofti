@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Window;
+import language.LanguageController;
 import model.Course;
 import model.Helpers;
 import zextra.ControllerClass;
@@ -32,6 +33,8 @@ public class AnchorPaneNode extends AnchorPane {
 
     private List<Course> courses = new ArrayList<>();
 
+    public LanguageController lang = new LanguageController();
+
     /**
      * Create a anchor pane node. Date is not assigned in the constructor.
      * @param children children of the anchor pane
@@ -52,9 +55,9 @@ public class AnchorPaneNode extends AnchorPane {
                 gridPane.setHgap(10);
                 gridPane.setVgap(10);
 
-                Text coursesText = new Text("Course");
+                Text coursesText = new Text(lang.COURSES_TEXT);
                 coursesText.setFont(Font.font(20));
-                Text timeText = new Text("Time");
+                Text timeText = new Text(lang.TIME_TEXT);
                 timeText.setFont(Font.font(20));
                 gridPane.add(coursesText, 0, 0, 1, 1);
                 gridPane.add(timeText, 1, 0, 1, 1);
@@ -70,7 +73,7 @@ public class AnchorPaneNode extends AnchorPane {
                 dp.getChildren().add(gridPane);
                 dp.setPadding(new Insets(10));
                 d.setDialogPane(dp);
-                d.setTitle("Courses on " + date.getDayOfMonth() + " " + date.getMonth().toString());
+                d.setTitle(lang.COURSES_ON_TEXT + " " + date.getDayOfMonth() + " " + lang.MONTHS_TEXT[date.getMonthValue() - 1]);
                 Window window = d.getDialogPane().getScene().getWindow();
                 window.setOnCloseRequest((evt) -> {
                     d.close();

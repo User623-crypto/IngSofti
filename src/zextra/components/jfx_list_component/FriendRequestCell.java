@@ -7,15 +7,19 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import language.LanguageController;
 import model.FriendRequest;
 import model.Notification;
 import model.dao.FriendRequestDao;
 import model.dao.NotificationDao;
 
 public class FriendRequestCell extends ListCell<FriendRequest> {
+
+    public LanguageController lang = new LanguageController();
+
     private HBox hbox = new HBox();
-    private Button acceptButton = new Button("Accept");
-    private Button rejectButton = new Button("Reject");
+    private Button acceptButton = new Button(lang.ACCEPT_TEXT);
+    private Button rejectButton = new Button(lang.REJECT_TEXT);
     private Pane pane = new Pane();
     private Label label = new Label("");
 

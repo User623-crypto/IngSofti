@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import language.LanguageController;
 import model.Course;
 import model.User;
 import model.dao.CourseDao;
@@ -36,7 +37,7 @@ public class FullCalendarView {
 
     private List<Course> courses = new ArrayList<>();
 
-
+    public LanguageController lang = new LanguageController();
     /**
      * Create a calendar view
      * @param yearMonth year month to create the calendar of
@@ -58,9 +59,10 @@ public class FullCalendarView {
             }
         }
         // Days of the week labels
-        Text[] dayNames = new Text[]{ new Text("Monday"), new Text("Tuesday"),
-                new Text("Wednesday"), new Text("Thursday"), new Text("Friday"),
-                new Text("Saturday"), new Text("Sunday") };
+
+        Text[] dayNames = new Text[]{ new Text(lang.WEEKDAYS_TEXT[0]), new Text(lang.WEEKDAYS_TEXT[1]),
+                new Text(lang.WEEKDAYS_TEXT[2]), new Text(lang.WEEKDAYS_TEXT[3]), new Text(lang.WEEKDAYS_TEXT[4]),
+                new Text(lang.WEEKDAYS_TEXT[5]), new Text(lang.WEEKDAYS_TEXT[6]) };
         GridPane dayLabels = new GridPane();
         dayLabels.setPrefWidth(800);
         Integer col = 0;
@@ -78,6 +80,7 @@ public class FullCalendarView {
         Button nextMonth = new Button(">>");
         nextMonth.setOnAction(e -> nextMonth());
         HBox titleBar = new HBox(previousMonth, calendarTitle, nextMonth);
+        titleBar.setSpacing(20);
         titleBar.setAlignment(Pos.BASELINE_CENTER);
         // Populate calendar with the appropriate day numbers
         populateCalendar(yearMonth);
@@ -90,7 +93,7 @@ public class FullCalendarView {
         greenBox.setPrefSize(30, 30);
         greenBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.DEFAULT_WIDTHS)));
         greenBox.setStyle("-fx-background-color: #52ff52");
-        Text infoText = new Text("Days with courses");
+        Text infoText = new Text(lang.CALENDAR_INFO_TEXT);
         infoText.setFont(Font.font(18));
         info.getChildren().add(greenBox);
         info.getChildren().add(infoText);
@@ -166,7 +169,7 @@ public class FullCalendarView {
             calendarDate = calendarDate.plusDays(1);
         }
         // Change the title of the calendar
-        calendarTitle.setText(yearMonth.getMonth().toString() + " " + String.valueOf(yearMonth.getYear()));
+        calendarTitle.setText(lang.MONTHS_TEXT[yearMonth.getMonthValue() - 1] + " " + String.valueOf(yearMonth.getYear()));
     }
 
     /**

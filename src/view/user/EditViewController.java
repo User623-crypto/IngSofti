@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import language.LanguageController;
 import model.User;
 import model.dao.UserDao;
 import zextra.ControllerClass;
@@ -23,6 +24,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditViewController implements Initializable, ControllerClass {
+
+    public LanguageController lang = new LanguageController();
 
     @FXML
     JFXButton albBtn;
@@ -50,6 +53,11 @@ public class EditViewController implements Initializable, ControllerClass {
     @FXML
     Button updateBtn;
 
+    @FXML Label nameLabel;
+    @FXML Label passwordLabel;
+    @FXML Label notificationStatusLabel;
+    @FXML Button changeImgBtn;
+
     public boolean didChangeImage = false;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,13 +68,19 @@ public class EditViewController implements Initializable, ControllerClass {
         if (Session.isInEnglish)
         {
             engBtn.setDisable(true);
-            languageLabel.setText("Gjuha");
         }else {
             albBtn.setDisable(true);
-            languageLabel.setText("Language");
-
         }
 
+        languageLabel.setText(lang.LANGUAGE_TEXT);
+        nameLabel.setText(lang.USERNAME_TEXT);
+        passwordLabel.setText(lang.PASSWORD_TEXT);
+        notificationStatusLabel.setText(lang.NOTIFICATION_STATUS_TEXT);
+        yesNotification.setText(lang.YES_TEXT);
+        noNotification.setText(lang.NO_TEXT);
+        goBackBtn.setText(lang.GO_BACK_TEXT);
+        updateBtn.setText(lang.UPDATE_TEXT);
+        changeImgBtn.setText(lang.CHANGE_IMAGE_TEXT);
     }
 
     @Override
@@ -163,14 +177,23 @@ public class EditViewController implements Initializable, ControllerClass {
             albBtn.setDisable(true);
             Session.isInEnglish=false;
             engBtn.setDisable(false);
-            languageLabel.setText("Language");
         }else {
             //Do te thote qe alb is disabled dhe eng is enabled
             albBtn.setDisable(false);
             Session.isInEnglish=true;
             engBtn.setDisable(true);
-            languageLabel.setText("Gjuha");
         }
+
+        lang = new LanguageController();
+        languageLabel.setText(lang.LANGUAGE_TEXT);
+        nameLabel.setText(lang.USERNAME_TEXT);
+        passwordLabel.setText(lang.PASSWORD_TEXT);
+        notificationStatusLabel.setText(lang.NOTIFICATION_STATUS_TEXT);
+        yesNotification.setText(lang.YES_TEXT);
+        noNotification.setText(lang.NO_TEXT);
+        goBackBtn.setText(lang.GO_BACK_TEXT);
+        updateBtn.setText(lang.UPDATE_TEXT);
+        changeImgBtn.setText(lang.CHANGE_IMAGE_TEXT);
     }
 
 }

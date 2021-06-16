@@ -40,7 +40,7 @@
                                                     <graphic>
                                                         <FontAwesomeIconView glyphName="CREDIT_CARD" />
                                                     </graphic></Label>
-                                                <Label alignment="CENTER_RIGHT" text="Course Day">
+                                                <Label fx:id="courseDayLabel" alignment="CENTER_RIGHT" text="Course Day">
                                                     <graphic>
                                                         <FontAwesomeIconView glyphName="CREDIT_CARD" />
                                                     </graphic>
@@ -67,7 +67,7 @@
                         </Tab>
                   <Tab>
                      <graphic>
-                        <Label cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Announcements">
+                        <Label fx:id="announcementsLabel" cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Announcements">
                            <font>
                               <Font name="Calibri" size="20.0" />
                            </font>
@@ -87,7 +87,7 @@
                   </Tab>
                         <Tab>
                             <graphic>
-                                <Label cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Ateendees">
+                                <Label fx:id="attendeesLabel" cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Ateendees">
                                     <font>
                                         <Font name="Calibri" size="20.0" />
                                     </font>
@@ -106,7 +106,7 @@
                         </Tab>
                         <Tab>
                             <graphic>
-                                <Label cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Comments">
+                                <Label fx:id="commentsLabel" cache="true" style="-fx-rotate: 90; -fx-text-fill: white;" text="Comments">
                                     <font>
                                         <Font name="Calibri" size="20.0" />
                                     </font>
@@ -129,7 +129,7 @@
         </AnchorPane>
         <HBox alignment="CENTER" prefHeight="105.0" prefWidth="1000.0" styleClass="sidebar" stylesheets="@../../styles/main.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label fx:id="nameLabel" alignment="CENTER" prefHeight="88.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-font-family: Calibri;" text="Course Name" textFill="WHITE">
+                <Label fx:id="courseNameLabel" alignment="CENTER" prefHeight="88.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-font-family: Calibri;" text="Course Name" textFill="WHITE">
                     <padding>
                         <Insets left="10.0" />
                     </padding>

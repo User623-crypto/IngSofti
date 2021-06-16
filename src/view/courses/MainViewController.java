@@ -7,8 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import language.LanguageController;
 import model.Comment;
@@ -25,7 +27,6 @@ import zextra.components.commentComponent.CommentComponent;
 import zextra.components.jfx_list_component.FriendsCell;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,7 +43,7 @@ public class MainViewController implements Initializable, ControllerClass {
     public List<Comment> announcements = new ArrayList<>();
 
     @FXML
-    public Label nameLabel;
+    public Label courseNameLabel;
     @FXML public Label
             dayLabel;
     @FXML public Label timeLabel;
@@ -58,16 +59,31 @@ public class MainViewController implements Initializable, ControllerClass {
     @FXML
     public VBox announcementSection;
 
+    @FXML public Label commentsLabel;
+    @FXML public Label courseDayLabel;
+    @FXML public Label announcementsLabel;
+    @FXML public Label attendeesLabel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usersInCourseList.setItems(attendee);
         usersInCourseList.setCellFactory(param -> new FriendsCell());
+
+        courseNameLabel.setText(lang.COURSE_NAME_TEXT);
+        courseDayLabel.setText(lang.COURSE_DAY_TEXT);
+        commentsLabel.setText(lang.COMMENTS_TEXT);
+        announcementsLabel.setText(lang.ANNOUNCEMENTS_TEXT);
+        attendeesLabel.setText(lang.ATTENDEES_TEXT);
+        enrollButton.setText(lang.ENROLL_TEXT);
+        dropButton.setText(lang.DROP_TEXT);
+        dayLabel.setText(lang.COURSE_DAY_TEXT);
+        timeLabel.setText(lang.TIME_TEXT);
     }
 
     @Override
     public void preloadData(Object object) {
         selectedCourse = (Course) object;
-        nameLabel.setText(selectedCourse.getName());
+        courseNameLabel.setText(selectedCourse.getName());
         dayLabel.setText(selectedCourse.getDay() + "");
         timeLabel.setText(selectedCourse.getTime());
         try {
@@ -85,11 +101,13 @@ public class MainViewController implements Initializable, ControllerClass {
         }
 
         Button addComment = new Button(ADD_COMMENT_TEXT);
-
-        commentSection.getChildren().add(addComment);
+        HBox commentHBox = new HBox();
+        commentHBox.setPadding(new Insets(20));
+        commentHBox.getChildren().add(addComment);
+        commentSection.getChildren().add(commentHBox);
 
         addComment.setOnAction(evt -> {
-            AddCommentComponent added = new AddCommentComponent(Helpers.CommentType.BASIC_COMMENT.ordinal(), null, Session.userSession.getId());
+            AddCommentComponent added = new AddCommentComponent(Helpers.CommentType.BASIC_COMMENT.ordinal(), null, null);
             commentSection.getChildren().add(1, new CommentComponent(added.getNewComment()).getCommentContainer());
         });
 

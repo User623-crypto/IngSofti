@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import language.LanguageController;
 import model.User;
 import model.dao.FriendRequestDao;
 import zextra.Session;
@@ -18,8 +19,10 @@ import java.sql.SQLException;
 
 public class FriendsCell extends ListCell<User> {
 
+    public LanguageController lang = new LanguageController();
+
     private HBox hbox = new HBox();
-    private Button btn = new Button("Send Friend Request");
+    private Button btn = new Button(lang.SEND_FRIEND_REQ_TEXT);
     private Pane pane = new Pane();
     private Label label = new Label("");
     private ImageView img = new ImageView();
@@ -34,7 +37,7 @@ public class FriendsCell extends ListCell<User> {
             //remove the shit
             try {
                 new FriendRequestDao().sendFriendRequest(Session.userSession.getId(),super.getItem().getId() );
-                btn.setText("Request Sent");
+                btn.setText(lang.REQUEST_SENT_TEXT);
                 btn.setDisable(true);
             }catch (Exception exception){
 
@@ -61,7 +64,7 @@ public class FriendsCell extends ListCell<User> {
             img.setFitWidth(50);
             try {
                 if (new FriendRequestDao().areFriends(Session.userSession.getId(),super.getItem().getId())) {
-                    btn.setText("Friends");
+                    btn.setText(lang.FRIENDS_TEXT);
                     btn.setDisable(true);
                 }
 

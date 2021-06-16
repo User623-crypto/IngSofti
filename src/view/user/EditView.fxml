@@ -46,9 +46,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Name" />
-                        <Label text="Password" GridPane.rowIndex="1" />
-                        <Label text="Notification Status" GridPane.rowIndex="2" />
+                        <Label fx:id="nameLabel" text="Name" />
+                        <Label fx:id="passwordLabel" text="Password" GridPane.rowIndex="1" />
+                        <Label fx:id="notificationStatusLabel" text="Notification Status" GridPane.rowIndex="2" />
                         <TextField fx:id="nameField" GridPane.columnIndex="1" />
                         <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -72,7 +72,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <ImageView fx:id="image" fitHeight="221.0" fitWidth="273.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button mnemonicParsing="false" onAction="#changeImage" text="Change Image">
+                        <Button fx:id="changeImgBtn" mnemonicParsing="false" onAction="#changeImage" text="Change Image">
                            <VBox.margin>
                               <Insets left="5.0" top="5.0" />
                            </VBox.margin>

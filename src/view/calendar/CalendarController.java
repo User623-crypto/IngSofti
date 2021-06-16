@@ -12,8 +12,7 @@ import java.time.YearMonth;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable, ControllerClass {
-    SceneChanger sceneChanger = new SceneChanger();
-    // Get the pane to put the calendar on
+
     @FXML public Pane calendarPane;
 
     public CalendarController(){

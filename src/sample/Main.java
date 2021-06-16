@@ -19,13 +19,18 @@ import java.util.Objects;
 public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception{
-
-        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/view/LoginView.fxml")));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
         primaryStage.setTitle("Login");
         primaryStage.setResizable(true);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        User a = new User("Luka","Laka");
+        try{
+            a.setImageFile(new File("./src/res/yugi.png"));
+//            a.saveImageFileLocally();
+        }catch (Exception e){ System.out.println(e.getMessage());}
 
         primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
             try {

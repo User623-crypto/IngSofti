@@ -1,25 +1,19 @@
 package zextra.components.commentComponent;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import language.LanguageController;
 import model.Comment;
 import model.Helpers;
-import model.Post;
 import model.dao.CommentDao;
-import zextra.SceneChanger;
 import zextra.Session;
 
 import java.sql.SQLException;
@@ -146,7 +140,7 @@ public class CommentComponent {
         commentHBox.getChildren().add(commentLikeButton);
         commentHBox.getChildren().add(commentLikeNumberLabel);
 
-        if(c.getComment_type() == Helpers.CommentType.BASIC_COMMENT.ordinal()) {
+        if(c.getComment_type() != Helpers.CommentType.REPLY.ordinal()) {
             Button replyButton = new Button(REPLY_TEXT);
             JFXButton showRepliesButton = new JFXButton(SHOW_REPLIES_TEXT);
             showRepliesButton.setStyle("-fx-text-fill: #0033eb; -fx-font-size: 15px;");
