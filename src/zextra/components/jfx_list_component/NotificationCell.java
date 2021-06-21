@@ -7,10 +7,13 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import language.LanguageController;
 import model.Notification;
 import model.dao.NotificationDao;
 
 public class NotificationCell extends ListCell<Notification> {
+
+    LanguageController lang = new LanguageController();
 
     private HBox hbox = new HBox();
     private Button btn = new Button("Dismiss");
@@ -27,7 +30,7 @@ public class NotificationCell extends ListCell<Notification> {
                 getListView().getItems().remove(getItem());
 
             }catch (Exception exception){
-                ErrorHandler.generateError("Oops something went wrong",()->{});
+                ErrorHandler.generateError(lang.DATABASE_CONNECTION_ERROR_TEXT,()->{});
             }
         });
     }

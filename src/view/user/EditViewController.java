@@ -131,7 +131,7 @@ public class EditViewController implements Initializable, ControllerClass {
 
     /**
      * This method will change the image of the user when clicked
-     * @param event
+     * @param event Stage
      */
     public void changeImage(ActionEvent event){
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -171,14 +171,12 @@ public class EditViewController implements Initializable, ControllerClass {
 
     public void toggleButton()
     {
-        //Do te thote eng is disabled dhe alb is enabled
         if (Session.isInEnglish)
         {
             albBtn.setDisable(true);
             Session.isInEnglish=false;
             engBtn.setDisable(false);
         }else {
-            //Do te thote qe alb is disabled dhe eng is enabled
             albBtn.setDisable(false);
             Session.isInEnglish=true;
             engBtn.setDisable(true);

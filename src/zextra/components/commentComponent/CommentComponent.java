@@ -24,15 +24,6 @@ public class CommentComponent {
 
     LanguageController lang = new LanguageController();
 
-
-    public String SHOW_REPLIES_TEXT = lang.SHOW_REPLIES_TEXT;
-    public String HIDE_REPLIES_TEXT = lang.HIDE_REPLIES_TEXT;
-    public String LIKE_TEXT = lang.LIKE_TEXT;
-    public String REPLY_TEXT = lang.REPLY_TEXT;
-    public String NO_REPLIES_TEXT = lang.NO_REPLIES_TEXT;
-    public String ADD_COMMENT_TEXT = lang.ADD_COMMENT_TEXT;
-
-
     VBox commentContainer;
     VBox repliesContainer;
     VBox commentVBox;
@@ -86,7 +77,7 @@ public class CommentComponent {
             }
         }
         else {
-            Text noReplies = new Text(NO_REPLIES_TEXT);
+            Text noReplies = new Text(lang.NO_REPLIES_TEXT);
             noReplies.setFont(Font.font(20));
             repliesContainer.getChildren().add(noReplies);
         }
@@ -109,7 +100,7 @@ public class CommentComponent {
         commentHBox.setAlignment(Pos.CENTER_RIGHT);
         commentHBox.setSpacing(10);
 
-        Button commentLikeButton = new Button(LIKE_TEXT);
+        Button commentLikeButton = new Button(lang.LIKE_TEXT);
         commentLikeButton.setMnemonicParsing(false);
         boolean checkIfCommentLiked;
         try {
@@ -141,17 +132,17 @@ public class CommentComponent {
         commentHBox.getChildren().add(commentLikeNumberLabel);
 
         if(c.getComment_type() != Helpers.CommentType.REPLY.ordinal()) {
-            Button replyButton = new Button(REPLY_TEXT);
-            JFXButton showRepliesButton = new JFXButton(SHOW_REPLIES_TEXT);
+            Button replyButton = new Button(lang.REPLY_TEXT);
+            JFXButton showRepliesButton = new JFXButton(lang.SHOW_REPLIES_TEXT);
             showRepliesButton.setStyle("-fx-text-fill: #0033eb; -fx-font-size: 15px;");
 
             showRepliesButton.setOnAction(evt -> {
                 setShowReplies(!showReplies);
                 repliesContainer.setVisible(showReplies);
                 if(showReplies)
-                    showRepliesButton.setText(HIDE_REPLIES_TEXT);
+                    showRepliesButton.setText(lang.HIDE_REPLIES_TEXT);
                 else
-                    showRepliesButton.setText(SHOW_REPLIES_TEXT);
+                    showRepliesButton.setText(lang.SHOW_REPLIES_TEXT);
             });
 
             replyButton.setOnAction(evt -> {

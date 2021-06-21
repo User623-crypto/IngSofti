@@ -112,11 +112,13 @@ public class FriendRequestDao {
         }
     }
 
+
     /**
      * Checks if users are friend or not
      * @param userId1 the first user who will be befriended
      * @param userId2 the second user who will be befriended
      * @return return true if they are friend
+     * @throws SQLException Throws exception if there is no connection
      */
     public boolean areFriends(int userId1,int userId2)throws SQLException
     {

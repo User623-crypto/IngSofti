@@ -2,6 +2,9 @@ package language;
 
 import zextra.Session;
 
+/**
+ * Class which is used to access language elements depending on the language
+ */
 public class LanguageController {
 
 
@@ -14,7 +17,7 @@ public class LanguageController {
     public String POSTS_TEXT = LanguageElements.POSTS_TEXT[Session.isInEnglish ? 1 : 0];
     public String FRIENDS_TEXT = LanguageElements.FRIENDS_TEXT[Session.isInEnglish ? 1 : 0];
     public String SEE_DETAILS_TEXT = LanguageElements.SEE_DETAILS_TEXT[Session.isInEnglish ? 1 : 0];
-    /////// maintest -> change text
+    public String NOTICES_TEXT = LanguageElements.NOTICES_TEXT[Session.isInEnglish ? 1 : 0];
     public String FRIEND_REQUEST_TEXT = LanguageElements.FRIEND_REQUEST_TEXT[Session.isInEnglish ? 1 : 0];
     public String NOTIFICATIONS_TEXT = LanguageElements.NOTIFICATIONS_TEXT[Session.isInEnglish ? 1 : 0];
     public String NOTIFICATION_STATUS_TEXT = LanguageElements.NOTIFICATION_STATUS_TEXT[Session.isInEnglish ? 1 : 0];
@@ -55,6 +58,10 @@ public class LanguageController {
     public String REQUEST_SENT_TEXT = LanguageElements.REQUEST_SENT_TEXT[Session.isInEnglish ? 1 : 0];
     public String ACCEPT_TEXT = LanguageElements.ACCEPT_TEXT[Session.isInEnglish ? 1 : 0];
     public String REJECT_TEXT = LanguageElements.REJECT_TEXT[Session.isInEnglish ? 1 : 0];
-
+    // Exceptions
+    public String STAGE_ERROR_TEXT = LanguageElements.STAGE_ERROR_TEXT[Session.isInEnglish ? 1 : 0];
+    public String DATABASE_CONNECTION_ERROR_TEXT = LanguageElements.DATABASE_CONNECTION_ERROR_TEXT[Session.isInEnglish ? 1 : 0];
+    public String LONG_COMMENT_ERROR_TEXT = LanguageElements.LONG_COMMENT_ERROR_TEXT[Session.isInEnglish ? 1 : 0];
+    public String EMPTY_COMMENT_ERROR_TEXT = LanguageElements.EMPTY_COMMENT_ERROR_TEXT[Session.isInEnglish ? 1 : 0];
 
 }

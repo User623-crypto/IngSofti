@@ -22,24 +22,7 @@ public class SceneChanger {
     private void closeConnection()  {if (connection != null) try{connection.close();}
     catch (Exception ignored){}
     }
-    public void changeStage(ActionEvent event, String viewName, String Title) throws IOException
-    {
-        closeConnection();
-        FXMLLoader loader=new FXMLLoader();
-        loader.setLocation(getClass().getResource(viewName));
 
-        Parent parent=loader.load();
-
-        Scene scene=new Scene(parent);
-
-        Stage stage= new Stage();
-
-
-        stage.setTitle(Title);
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     public void changeScene(ActionEvent event,String viewName,String Title) throws IOException
     {
@@ -60,24 +43,6 @@ public class SceneChanger {
 
     }
 
-    public void changeScene(Node node,String viewName,String Title) throws IOException
-    {
-        closeConnection();
-        FXMLLoader loader=new FXMLLoader();
-        loader.setLocation(getClass().getResource(viewName));
-
-        Parent parent=loader.load();
-
-        Scene scene=new Scene(parent);
-
-        Stage stage= (Stage)(node).getScene().getWindow();
-
-
-        stage.setTitle(Title);
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     public void changeScene(ActionEvent event, String viewName, String Title, User user) throws IOException
     {
@@ -116,7 +81,6 @@ public class SceneChanger {
         controllerClass.preloadData(objekt);
 
 
-//        Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Stage currentStage = (Stage)button.getScene().getWindow();
         newStage.setTitle(Title);
 
@@ -126,65 +90,11 @@ public class SceneChanger {
         newStage.show();
         newStage.setResizable(false);
 
-//        newStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//            public void handle(WindowEvent we) {
-//                closeConnection();
-//            }
-//        });
-
-
 
     }
 
-    public void createStage2(ActionEvent event, String viewName, String Title,
-                             Object objekt) throws IOException {
-
-        if(objekt == null)
-            return;
-        Stage newStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(viewName));
-        Parent parent = loader.load();
-
-        Scene scene = new Scene(parent);
-
-        ControllerClass controllerClass = loader.getController();
-
-        controllerClass.preloadData(objekt);
-
-        Stage currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        newStage.setTitle(Title);
-
-        newStage.setScene(scene);
-        newStage.initModality(Modality.WINDOW_MODAL);
-        newStage.initOwner(currentStage);
-        newStage.show();
-        newStage.setResizable(false);
-
-    }
-
-    public void createStageNoModality(ActionEvent event, String viewName, String Title) throws IOException {
-
-        Stage newStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(viewName));
-        Parent parent = loader.load();
-
-        Scene scene = new Scene(parent);
-
-        newStage.setTitle(Title);
-
-        newStage.setScene(scene);
-        newStage.initModality(Modality.NONE);
-        newStage.show();
-
-//        newStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//            public void handle(WindowEvent we) {
-//                closeConnection();
-//            }
-//        });
 
 
 
-    }
+
 }

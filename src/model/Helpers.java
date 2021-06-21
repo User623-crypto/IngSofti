@@ -8,7 +8,7 @@ public class Helpers {
      * It will be used to indicate the comment type as an integer
      * Example: Helpers.CommentType.BASIC_COMMENT.ordinal();
      */
-    public static enum CommentType {
+    public enum CommentType {
         BASIC_COMMENT,
         REPLY,
         ANNOUNCEMENT,

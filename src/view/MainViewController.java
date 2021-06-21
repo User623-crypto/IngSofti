@@ -62,7 +62,7 @@ public class MainViewController implements Initializable, ControllerClass {
     @FXML Tab timelineTab;
     @FXML Tab friendsTab;
     @FXML MenuItem seeDetailsMenu;
-    @FXML Tab mainTest;
+    @FXML Tab noticesTab;
     @FXML Label friendRequestLabel;
     @FXML Label notificationsLabel;
     @FXML Tab coursesTab;
@@ -90,7 +90,7 @@ public class MainViewController implements Initializable, ControllerClass {
             try {
                 notificationListView.addAll(new NotificationDao().getNotifications(Session.userSession.getId()));
             } catch (Exception exception) {
-                ErrorHandler.generateError("Oops couldn't load the notification",()->{});
+                ErrorHandler.generateError(lang.DATABASE_CONNECTION_ERROR_TEXT,()->{});
             }
         }
 
@@ -114,14 +114,13 @@ public class MainViewController implements Initializable, ControllerClass {
             }
 
         } catch (Exception exception) {
-            ErrorHandler.generateError("Oops couldn't friend req /user posts",()->{});
+            ErrorHandler.generateError(lang.DATABASE_CONNECTION_ERROR_TEXT,()->{});
         }
 
 
 
 
         logoutButton.setText(lang.LOGOUT_TEXT);
-//        nameLabel.setText(lang.USERNAME_TEXT);
         friendNameCol.setText(lang.FRIENDS_TEXT);
         settingsButton.setText(lang.CONFIGURATION_TEXT);
         calendarBtn.setText(lang.CALENDAR_TEXT);
@@ -129,7 +128,7 @@ public class MainViewController implements Initializable, ControllerClass {
         timelineTab.setText(lang.TIMELINE_TEXT);
         friendsTab.setText(lang.FRIENDS_TEXT);
         seeDetailsMenu.setText(lang.SEE_DETAILS_TEXT);
-//        mainTest.;
+        noticesTab.setText(lang.NOTICES_TEXT);
         friendRequestLabel.setText(lang.FRIEND_REQUEST_TEXT);
         notificationsLabel.setText(lang.NOTIFICATIONS_TEXT);
         coursesTab.setText(lang.COURSES_TEXT);
@@ -137,6 +136,10 @@ public class MainViewController implements Initializable, ControllerClass {
         nameCol.setText(lang.COURSES_TEXT);
     }
 
+    /**
+     * Logs out the user
+     * @param event Stage
+     */
     public void LogoutButtonPushed(ActionEvent event) {
         Session.userSession = null;
 
@@ -149,6 +152,10 @@ public class MainViewController implements Initializable, ControllerClass {
         }
     }
 
+    /**
+     * Opens the configuration tab
+     * @param event Stage
+     */
     public void settingsButtonPushed(ActionEvent event) {
 
 
@@ -163,7 +170,9 @@ public class MainViewController implements Initializable, ControllerClass {
         }
     }
 
-
+    /**
+     * Opens the course detail stage
+     */
     public void checkCoursesDetail()
     {
         Course a = courseTableView.getSelectionModel().getSelectedItem();
@@ -172,16 +181,18 @@ public class MainViewController implements Initializable, ControllerClass {
             return;
         }
         try {
-            sceneChanger.createStage("/view/courses/MainView.fxml",lang.COURSES_TEXT,a,logoutButton);
+            sceneChanger.createStage("/view/courses/MainView.fxml",a.getName(),a,logoutButton);
 
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
-            ErrorHandler.generateError("Internal Not Found Stage error",()->{});
+            ErrorHandler.generateError(lang.STAGE_ERROR_TEXT,()->{});
         }
     }
 
-
+    /**
+     * Opens the courses calendar stage
+     */
     public void checkCoursesCalendar()
     {
         int userId = Session.userSession.getId();
@@ -192,7 +203,7 @@ public class MainViewController implements Initializable, ControllerClass {
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
-            ErrorHandler.generateError("Internal Not Found Stage error",()->{});
+            ErrorHandler.generateError(lang.STAGE_ERROR_TEXT,()->{});
         }
     }
 }

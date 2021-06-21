@@ -5,11 +5,7 @@ package zdatabase;
 import java.sql.*;
 
 public class DatabaseManager {
-    //public final static String url="jdbc:mysql://localhost:3306/magazine_v2";
-//    public final static String url="jdbc:mysql://localhost/magazine_v2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-//    public final static String dbName="test";
-//    public final static String dbUsername="root";
-//    public final static String dbPassword="testing1234";
+
     public final static String url= Config.url;
     public final static String dbUsername=Config.dbUsername;
     public final static String dbPassword=Config.dbPassword;
@@ -17,8 +13,10 @@ public class DatabaseManager {
     private static Connection connection = null;
 
 
-
-    /**Krijon lidhjen me databazen*/
+    /**
+     * Creates a connection with the database if no previous connection was established
+     * @return Returns the connection object
+     */
     public static synchronized Connection getConnection()  {
         try {
             if (connection == null || connection.isClosed()) {

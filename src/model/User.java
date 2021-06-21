@@ -58,10 +58,12 @@ public class User {
         this.imageFile = imageFile;
     }
 
+
+
     /**
      * This function will save the image that the users upload into the local directory
+     * @throws IOException Throws exception if there are problems in writing the image file
      */
-
     public void saveImageFileLocally() throws IOException {
         Path sourcePath = imageFile.toPath();
 

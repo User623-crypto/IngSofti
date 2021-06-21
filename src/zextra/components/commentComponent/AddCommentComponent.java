@@ -27,10 +27,6 @@ public class AddCommentComponent {
 
     LanguageController lang = new LanguageController();
 
-    public String ADD_COMMENT_TEXT = lang.ADD_COMMENT_TEXT;
-    public String ADD_REPLY_TEXT = lang.ADD_REPLY_TEXT;
-    public String ADD_POST_TEXT = lang.ADD_POST_TEXT;
-    public String CANCEL_TEXT = lang.CANCEL_TEXT;
 
     Stage stage;
     Comment newComment;
@@ -42,11 +38,11 @@ public class AddCommentComponent {
         HBox titleHBox = new HBox();
         Text title = null;
         if(comment_type == Helpers.CommentType.BASIC_COMMENT.ordinal())
-            title = new Text(ADD_COMMENT_TEXT);
+            title = new Text(lang.ADD_COMMENT_TEXT);
         else if(comment_type == Helpers.CommentType.REPLY.ordinal())
-            title = new Text(ADD_REPLY_TEXT);
+            title = new Text(lang.ADD_REPLY_TEXT);
         else if(comment_type == Helpers.CommentType.POST_UPDATE.ordinal())
-            title = new Text(ADD_POST_TEXT);
+            title = new Text(lang.ADD_POST_TEXT);
 
         titleHBox.setPadding(new Insets(5));
         titleHBox.getChildren().add(title);
@@ -60,12 +56,12 @@ public class AddCommentComponent {
         HBox buttonsHBox = new HBox();
         Button addComment = null;
         if(comment_type == Helpers.CommentType.BASIC_COMMENT.ordinal())
-            addComment = new Button(ADD_COMMENT_TEXT);
+            addComment = new Button(lang.ADD_COMMENT_TEXT);
         else if(comment_type == Helpers.CommentType.REPLY.ordinal())
-            addComment = new Button(ADD_REPLY_TEXT);
+            addComment = new Button(lang.ADD_REPLY_TEXT);
         else if(comment_type == Helpers.CommentType.POST_UPDATE.ordinal())
-            addComment = new Button(ADD_POST_TEXT);
-        Button cancel = new Button(CANCEL_TEXT);
+            addComment = new Button(lang.ADD_POST_TEXT);
+        Button cancel = new Button(lang.CANCEL_TEXT);
 
         addComment.setOnAction(evt -> {
             try {
@@ -89,11 +85,11 @@ public class AddCommentComponent {
         stage = new Stage();
         stage.setScene(scene);
         if(comment_type==Helpers.CommentType.BASIC_COMMENT.ordinal())
-            stage.setTitle(ADD_COMMENT_TEXT);
+            stage.setTitle(lang.ADD_COMMENT_TEXT);
         if(comment_type==Helpers.CommentType.REPLY.ordinal())
-            stage.setTitle(ADD_REPLY_TEXT);
+            stage.setTitle(lang.ADD_REPLY_TEXT);
         if(comment_type==Helpers.CommentType.POST_UPDATE.ordinal())
-            stage.setTitle(ADD_POST_TEXT);
+            stage.setTitle(lang.ADD_POST_TEXT);
 
         stage.showAndWait();
 

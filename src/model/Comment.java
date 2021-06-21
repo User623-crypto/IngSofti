@@ -1,5 +1,7 @@
 package model;
 
+import language.LanguageController;
+
 public class Comment {
     private Integer id;
     private Integer id_thread;
@@ -9,6 +11,7 @@ public class Comment {
     private String comment_body;
     private String user_name;
 
+    LanguageController lang = new LanguageController();
 
     public Comment(Integer id_thread, Integer id_course, Integer id_user, Integer comment_type, String comment_body) {
         this.id_thread = id_thread;
@@ -64,7 +67,9 @@ public class Comment {
 
     public void setComment_body(String comment_body) {
         if (comment_body.length()>255)
-            throw new IllegalArgumentException("Komenti nuk mund te jete kaq i gjate");
+            throw new IllegalArgumentException(lang.LONG_COMMENT_ERROR_TEXT);
+        if (comment_body.trim().length() == 0)
+            throw new IllegalArgumentException(lang.EMPTY_COMMENT_ERROR_TEXT);
         this.comment_body = comment_body;
     }
 

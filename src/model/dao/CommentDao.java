@@ -10,8 +10,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class used by Comment model to
+ */
 public class CommentDao {
 
+    /**
+     * Method used to insert new comment into the database
+     * @param comment Comment to be inserted into the database
+     * @return Returns the comment after attaching the name property
+     * @throws SQLException In case there's trouble connecting to the database
+     * @throws IllegalArgumentException In case there's trouble creating the database record and the ID is not generated
+     */
     public Comment insertIntoDB(Comment comment) throws SQLException, IllegalArgumentException {
         Connection connection = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
@@ -53,6 +63,12 @@ public class CommentDao {
         return comment;
     }
 
+    /**
+     * Gets the number of likes for a specific comment
+     * @param commentId The ID of the comment
+     * @return The number of likes
+     * @throws SQLException In case there's trouble connecting to the database
+     */
     public Integer getLikes(Integer commentId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;
@@ -76,6 +92,12 @@ public class CommentDao {
         return no_of_likes;
     }
 
+    /**
+     * Performs the action of adding a like to a comment
+     * @param commentId The ID of comment being liked
+     * @param userId The ID of the user liking the comment
+     * @throws SQLException In case there's trouble connecting to the database
+     */
     public void addLikeToComment(Integer commentId, Integer userId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
@@ -94,6 +116,13 @@ public class CommentDao {
         preparedStatement.close();
     }
 
+    /**
+     * Checks if a user has liked a comment previously
+     * @param commentId The ID of the comment being checked
+     * @param userId The ID of the user being checked
+     * @return Returns true or false whether a person has liked the comment
+     * @throws SQLException In case there's trouble connecting to the database
+     */
     public boolean checkIfLiked(Integer commentId, Integer userId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
         PreparedStatement preparedStatement;
@@ -118,6 +147,15 @@ public class CommentDao {
         return !liked;
     }
 
+    /**
+     * Gets the list of comments
+     * @param commentType The type of comment (Refer to Helpers class)
+     * @param threadId The ID of the main comment - can be null
+     * @param courseId The ID of the course on which the comment was made - can be null
+     * @param userId THe ID of the user who has commented - can be null
+     * @return Returns the list of comments
+     * @throws SQLException In case there's trouble connecting to the database
+     */
     public List<Comment> getComments(Integer commentType, Integer threadId, Integer courseId, Integer userId) throws SQLException{
         Connection connection = DatabaseManager.getConnection();
         ResultSet rs;

@@ -26,7 +26,6 @@ import java.util.ResourceBundle;
 public class ProfileViewController implements Initializable, ControllerClass {
 
     public LanguageController lang = new LanguageController();
-    /**Courses Table Properties*/
     @FXML
     public TableView<Course> courseTable;
     @FXML public TableColumn<Course,String> courseName;

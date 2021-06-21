@@ -34,7 +34,6 @@ public class FriendsCell extends ListCell<User> {
         hbox.setSpacing(10);
 
         btn.setOnAction(e->{
-            //remove the shit
             try {
                 new FriendRequestDao().sendFriendRequest(Session.userSession.getId(),super.getItem().getId() );
                 btn.setText(lang.REQUEST_SENT_TEXT);
@@ -50,7 +49,7 @@ public class FriendsCell extends ListCell<User> {
     /**
      * This will set the value for the label and the image in the ListCell
      * @param item The user passed as Parameter
-     * @param empty
+     * @param empty whether or not this cell represents data from the list. If it is empty, then it does not represent any domain data, but is a cell being used to render an "empty" row.
      */
     @Override
     public void updateItem(User item, boolean empty) {

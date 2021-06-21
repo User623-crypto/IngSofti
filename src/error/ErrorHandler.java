@@ -42,8 +42,7 @@ public class ErrorHandler {
         confimationAlert.setTitle("Confirmation Dialog");
         confimationAlert.setHeaderText("Read carefully!!!");
         confimationAlert.setContentText(teksti);
-//        confimationAlert.initModality(Modality.WINDOW_MODAL);
-//        confimationAlert.initOwner(node.getScene().getWindow());
+
 
         Optional<ButtonType> result = confimationAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){

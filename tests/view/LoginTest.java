@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.*;
 import org.testfx.api.FxRobot;
-import sample.Main;
+import view.Main;
 import zextra.SceneChanger;
 import zextra.Session;
 

@@ -120,7 +120,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="mainTest" text="Maintest">
+                  <Tab fx:id="noticesTab" text="Notices">
                      <content>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="680.0">
                            <padding>

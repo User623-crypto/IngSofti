@@ -30,9 +30,12 @@ public class NotificationDao {
 
     }
 
+
     /**
      * Gets all active notification for an User
      * @param userId the userId where it gets the notification
+     * @return Returns the notification list
+     * @throws SQLException Throws exception if there is no connection
      */
     public List<Notification> getNotifications(int userId) throws SQLException {
         Connection connection = DatabaseManager.getConnection();
@@ -69,7 +72,6 @@ public class NotificationDao {
      * @param text The inner text of the notification
      * @throws SQLException Throws exception if there is no connection
      */
-
     public void sendNotificationToFriends(String text)throws SQLException{
 
         List<User> users = new UserDao().readAllUserFriends(Session.userSession.getId());

@@ -1,5 +1,8 @@
 package language;
 
+/**
+ * Class which holds values for each language element
+ */
 public class LanguageElements {
 
     public static String[] AVATAR_TEXT = {
@@ -46,7 +49,12 @@ public class LanguageElements {
             "Shiko detajet",
             "See details"
     };
-    /////// maintest -> change text
+
+    public static String[] NOTICES_TEXT = {
+            "Lajmerime",
+            "Notices"
+    };
+
     public static String[] FRIEND_REQUEST_TEXT = {
             "Kerkesat e miqesise",
             "Friend requests"
@@ -244,6 +252,27 @@ public class LanguageElements {
     public static String[] REJECT_TEXT = {
             "Refuzo",
             "Reject"
+    };
+
+    // Exceptions
+    public static String[] STAGE_ERROR_TEXT = {
+            "Gabim: Pamja nuk u gjet",
+            "Error: Stage not found"
+    };
+
+    public static String[] DATABASE_CONNECTION_ERROR_TEXT = {
+            "Gabim: Nuk mund te kryhet lidhja me databazen",
+            "Error: Could not establish connection with the database"
+    };
+
+    public static String[] LONG_COMMENT_ERROR_TEXT = {
+            "Komenti nuk mund te jete me i gjate se 255 karaktere",
+            "Comment cannot be longer than 255 characters"
+    };
+
+    public static String[] EMPTY_COMMENT_ERROR_TEXT = {
+            "Komenti nuk mund te jete bosh",
+            "Comment cannot be empty"
     };
 
 }

@@ -91,14 +91,12 @@ public class Login implements Initializable {
 
     public void toggleButton()
     {
-        //Do te thote eng is disabled dhe alb is enabled
         if (Session.isInEnglish)
         {
             albBtn.setDisable(true);
             Session.isInEnglish=false;
             engBtn.setDisable(false);
         }else {
-            //Do te thote qe alb is disabled dhe eng is enabled
             albBtn.setDisable(false);
             Session.isInEnglish=true;
             engBtn.setDisable(true);
