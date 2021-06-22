@@ -12,5 +12,7 @@
     <orderEntry type="library" name="fontawesomefx-8.9" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.21" level="project" />
     <orderEntry type="library" name="org.testfx:testfx-junit5:4.0.15-alpha" level="project" />
+    <orderEntry type="library" name="easymock-4.3" level="project" />
+    <orderEntry type="library" name="objenesis-3.2" level="project" />
   </component>
 </module>

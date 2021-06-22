@@ -217,7 +217,7 @@ public class UserDao {
 
         new NotificationDao().sendNotificationToFriends(Session.userSession.getName()+" has enrolled in "+
                 course.getName());
-        Comment newPost = new Comment(null,null, userId, Helpers.CommentType.POST_UPDATE.ordinal(), "Wow this "+course.getName()+" is Amaizing");
+        Comment newPost = new Comment(null,null, userId, Helpers.CommentType.POST_UPDATE.ordinal(), "Just enrolled in "+course.getName());
 
         new CommentDao().insertIntoDB(newPost);
 

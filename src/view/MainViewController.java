@@ -103,6 +103,8 @@ public class MainViewController implements Initializable, ControllerClass {
 
         addComment.setOnAction(evt -> {
             AddCommentComponent added = new AddCommentComponent(Helpers.CommentType.POST_UPDATE.ordinal(), null, null);
+            if(added.getNewComment() == null)
+                return;
             timeLineContainer.getChildren().add(1, new CommentComponent(added.getNewComment()).getCommentContainer());
         });
 

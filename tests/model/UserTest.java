@@ -13,7 +13,7 @@ class UserTest {
 
     @BeforeEach
     void setUp() {
-        user = new User("Ina","InaFti.edu.al");
+        user = new User("Test","Passtest");
         user.setId(1);
     }
 
@@ -32,34 +32,14 @@ class UserTest {
 
 
     @Test
-    void saveImageFileLocally() {
-        String imageName = user.getImageFile().getName();
-        try {
-            boolean isSaved=false;
-            File directory = new File("./src/res/");
-            File fileList[] = directory.listFiles();
-            user.saveImageFileLocally();
-            for (File file :
-                    fileList) {
-                if (file.getName().endsWith(imageName)) isSaved=true;
-            }
-            if (!isSaved) fail("The doc is not saved");
-
-        } catch (IOException e) {
-           fail("It should find the directory where it must save the file");
-        }
-    }
-
-
-    @Test
     void setNameMaxLength() {
         try {
-            user.setName("A255characterlongStringthatshouldnotbealloedtoset as a name");
-            fail("It should tirgger an exception");
+            user.setName("255characterlongStringthatshouldnotbeallowedtoset as a name");
+            fail("It should trigger an exception");
 
         }catch (IllegalArgumentException e)
         {
-            System.out.println("Cought error correctly");
+            System.out.println("Caught error correctly");
 
         }catch (Exception e)
         {
@@ -74,7 +54,7 @@ class UserTest {
     void setPassword() {
         user.setPassword("MynewPassowrd");
         String expResult = "MynewPassowrd";
-        assertEquals(expResult,user.getName());
+        assertEquals(expResult,user.getPassword());
     }
 
 

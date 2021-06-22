@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import language.LanguageController;
 import model.dao.UserDao;
 import zextra.SceneChanger;
 import zextra.Session;
@@ -25,7 +26,7 @@ public class User {
     private boolean notification_on = true;
     private File imageFile;
 
-
+    LanguageController lang = new LanguageController();
     /**
      * User constructor that will initialize a user object
      * @param name The user name
@@ -66,9 +67,11 @@ public class User {
      */
     public void saveImageFileLocally() throws IOException {
         Path sourcePath = imageFile.toPath();
+        String fileName = imageFile.getName();
+        String fileExtension = fileName.substring(fileName.lastIndexOf(".")+1);
+        String newFileName = Session.userSession.getName() + "." + fileExtension;
 
-        String uniqueFileName =UUID.randomUUID()+imageFile.getName();
-        Path targetPath = Paths.get("./src/res/"+uniqueFileName);
+        Path targetPath = Paths.get("./src/res/"+ newFileName);
         Files.copy(sourcePath,targetPath, StandardCopyOption.REPLACE_EXISTING);
 
         imageFile = new File(targetPath.toString());
@@ -84,7 +87,7 @@ public class User {
 
     public void setName(String name) {
         if (name.length()>45)
-            throw new IllegalArgumentException("Emri Nuk mund te jete kaq i gjate");
+            throw new IllegalArgumentException(lang.USERNAME_LENGTH_ERROR);
         this.name = name;
     }
 
@@ -94,7 +97,7 @@ public class User {
 
     public void setPassword(String password) {
         if (password.length()>45 || password.length()<2)
-            throw new IllegalArgumentException("Fjalekalimi Nuk mund te jete kaq i gjate");
+            throw new IllegalArgumentException(lang.PASSWORD_LENGTH_ERROR_TEXT);
         this.password = password;
     }
 

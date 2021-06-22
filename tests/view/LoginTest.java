@@ -85,13 +85,13 @@ class LoginTest {
         if (albBtn.isDisable())
         {
             assert(Session.isInEnglish == false);
-            assertEquals(languageLabel.getText(),"Language");
+            assertEquals(languageLabel.getText(),"Gjuha");
         }
 
         robot.clickOn(engBtn);
         if (!engBtn.isDisable() || albBtn.isDisable()) fail("After it is clicked the button should be disabled");
-        if (Session.isInEnglish != true) fail("When clicked in english Session should be in english");
-        assertEquals(languageLabel.getText(),"Gjuha");
+        if (Session.isInEnglish == false) fail("When clicked in english Session should be in english");
+        assertEquals(languageLabel.getText(),"Language");
 
 
 

@@ -77,7 +77,7 @@ class MainViewControllerTest {
     @Test
     void settingsButtonPushed(FxRobot robot) {
         robot.clickOn(mainViewController.settingsButton);
-        if (!stage.getTitle().equals("Settings")) fail("The settings button does not work correctly");
+        if (!stage.getTitle().equals("Configurations") && !stage.getTitle().equals("Konfigurimet")) fail("The settings button does not work correctly");
     }
 
 

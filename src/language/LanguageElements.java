@@ -275,4 +275,14 @@ public class LanguageElements {
             "Comment cannot be empty"
     };
 
+    public static String[] PASSWORD_LENGTH_ERROR_TEXT = {
+            "Fjalekalimi duhet te jete 2 deri 45 karaktere",
+            "Password should be 2 to 45 characters"
+    };
+
+    public static String[] USERNAME_LENGTH_ERROR = {
+            "Emri i perdoruesit duhet te jete deri 45 karaktere",
+            "Username should be up to 45 characters"
+    };
+
 }

@@ -84,7 +84,7 @@ public class MainViewController implements Initializable, ControllerClass {
     public void preloadData(Object object) {
         selectedCourse = (Course) object;
         courseNameLabel.setText(selectedCourse.getName());
-        dayLabel.setText(selectedCourse.getDay() + "");
+        dayLabel.setText(lang.WEEKDAYS_TEXT[selectedCourse.getDay()-1]);
         timeLabel.setText(selectedCourse.getTime());
         try {
 
@@ -108,6 +108,8 @@ public class MainViewController implements Initializable, ControllerClass {
 
         addComment.setOnAction(evt -> {
             AddCommentComponent added = new AddCommentComponent(Helpers.CommentType.BASIC_COMMENT.ordinal(), null, null);
+            if(added.getNewComment() == null)
+                return;
             commentSection.getChildren().add(1, new CommentComponent(added.getNewComment()).getCommentContainer());
         });
 

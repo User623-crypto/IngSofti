@@ -147,6 +147,8 @@ public class CommentComponent {
 
             replyButton.setOnAction(evt -> {
                 AddCommentComponent added = new AddCommentComponent(Helpers.CommentType.REPLY.ordinal(), c.getId(), Session.userSession.getId());
+                if(added.getNewComment() == null)
+                    return;
                 repliesContainer.getChildren().add(0, getSingleCommentContainer(added.getNewComment()));
             });
             commentHBox.getChildren().add(replyButton);

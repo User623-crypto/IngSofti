@@ -63,5 +63,7 @@ public class LanguageController {
     public String DATABASE_CONNECTION_ERROR_TEXT = LanguageElements.DATABASE_CONNECTION_ERROR_TEXT[Session.isInEnglish ? 1 : 0];
     public String LONG_COMMENT_ERROR_TEXT = LanguageElements.LONG_COMMENT_ERROR_TEXT[Session.isInEnglish ? 1 : 0];
     public String EMPTY_COMMENT_ERROR_TEXT = LanguageElements.EMPTY_COMMENT_ERROR_TEXT[Session.isInEnglish ? 1 : 0];
+    public String PASSWORD_LENGTH_ERROR_TEXT = LanguageElements.PASSWORD_LENGTH_ERROR_TEXT[Session.isInEnglish ? 1 : 0];
+    public String USERNAME_LENGTH_ERROR = LanguageElements.USERNAME_LENGTH_ERROR[Session.isInEnglish ? 1 : 0];
 
 }

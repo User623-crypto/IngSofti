@@ -2,8 +2,11 @@ package zextra.components.commentComponent;
 
 import com.jfoenix.controls.JFXTextArea;
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import language.LanguageController;
 import model.Comment;
 import model.Helpers;
@@ -61,7 +65,6 @@ public class AddCommentComponent {
             addComment = new Button(lang.ADD_REPLY_TEXT);
         else if(comment_type == Helpers.CommentType.POST_UPDATE.ordinal())
             addComment = new Button(lang.ADD_POST_TEXT);
-        Button cancel = new Button(lang.CANCEL_TEXT);
 
         addComment.setOnAction(evt -> {
             try {
@@ -73,7 +76,7 @@ public class AddCommentComponent {
         });
 
         buttonsHBox.setPadding(new Insets(10));
-        buttonsHBox.getChildren().addAll(addComment, cancel);
+        buttonsHBox.getChildren().addAll(addComment);
 
         mainWrapper.setPadding(new Insets(10));
         mainWrapper.getChildren().addAll(titleHBox, commentHBox, buttonsHBox);
@@ -93,10 +96,10 @@ public class AddCommentComponent {
 
         stage.showAndWait();
 
-        cancel.setOnAction(evt -> {
-            stage.getScene().getWindow().hide();
-        });
+
     }
+
+
 
 
     public Stage getStage() {
